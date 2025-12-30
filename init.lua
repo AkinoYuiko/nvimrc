@@ -2,6 +2,7 @@
 vim.o.cursorline = true
 vim.o.number = true
 vim.o.swapfile = false
+vim.o.wrap = false
 vim.o.expandtab = true
 vim.o.tabstop = 2
 vim.o.shiftwidth = 2
@@ -87,13 +88,13 @@ vim.pack.add({
 -- 插件配置 --
 ----------------------
 -- 插件延迟加载（在读取文件或创建新文件时加载）
-vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
-	callback = function()
-		-- require('mason').setup() -- Mason
-		require("mini.pick").setup() -- mini.pick 配置
-		require("mini.files").setup({ windows = { preview = true } }) -- mini.files 文件浏览器配置
-	end,
-})
+-- vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+-- 	callback = function()
+-- require('mason').setup() -- Mason
+require("mini.pick").setup() -- mini.pick 配置
+require("mini.files").setup({ windows = { preview = true } }) -- mini.files 文件浏览器配置
+-- 	end,
+-- })
 ----------------------
 -- LSP 配置 --
 ----------------------
@@ -111,7 +112,7 @@ vim.lsp.config("jsonls", {
 		},
 	},
 })
--- lsr as conf
+-- .lsr as .conf
 vim.filetype.add({
 	extension = { lsr = "conf" },
 })
