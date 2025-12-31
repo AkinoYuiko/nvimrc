@@ -56,7 +56,7 @@ require("ts-query-loader").setup({
 	},
 })
 -- Mason
-require("mason").setup()
+require("mason").setup({ ensure_installed = { "tree-sitter-cli " } })
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"jsonls",
@@ -64,7 +64,7 @@ require("mason-lspconfig").setup({
 		"stylua",
 		"rust_analyzer",
 		"ts_ls",
-		"tombi",
+		-- "tombi",
 		"tinymist",
 		"yamlls",
 	},
