@@ -26,12 +26,13 @@ vim.pack.add({
 	{ src = "https://github.com/sainnhe/everforest" },
 	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/Corn207/ts-query-loader.nvim" },
 	-- { src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.files" },
 })
--- Packages config
+-- colorscheme
 vim.g.lightline = { colorscheme = "everforest" }
 vim.g.everforest_transparent_background = 2
 vim.cmd.colorscheme("everforest")
@@ -45,6 +46,16 @@ require("blink.cmp").setup({
 -- require("mason").setup()
 require("mini.pick").setup()
 require("mini.files").setup({ windows = { preview = true } })
+-- treesitter loader
+require("ts-query-loader").setup({
+	ensure_installed = {
+		"rust",
+		"toml",
+		"nginx",
+		"typst",
+		"typescript",
+	},
+})
 ----------------------
 -- LSP Config --
 ----------------------
@@ -151,10 +162,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 -- nvim-treesitter Auto Update Packages
-vim.api.nvim_create_autocmd("PackChanged", {
-	pattern = { "nvim-treesitter" },
-	callback = function()
-		vim.notify("Updating treesitter parsers", vim.log.levels.INFO)
-		require("nvim-treesitter").update(nil, { summary = true }):wait(30 * 1000)
-	end,
-})
+-- vim.api.nvim_create_autocmd("PackChanged", {
+-- 	pattern = { "nvim-treesitter" },
+-- 	callback = function()
+-- 		vim.notify("Updating treesitter parsers", vim.log.levels.INFO)
+-- 		require("nvim-treesitter").update(nil, { summary = true }):wait(30 * 1000)
+-- 	end,
+-- })
