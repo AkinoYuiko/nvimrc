@@ -22,8 +22,7 @@ vim.o.termguicolors = true
 -- Packages --
 ----------------------
 vim.pack.add({
-	{ src = "https://github.com/akinoyuiko/lightline.vim" },
-	{ src = "https://github.com/sainnhe/everforest" },
+	{ src = "https://github.com/neanias/everforest-nvim" },
 	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/Corn207/ts-query-loader.nvim" },
@@ -31,19 +30,23 @@ vim.pack.add({
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/nvim-mini/mini.snippets" },
+	{ src = "https://github.com/nvim-mini/mini.statusline" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.files" },
+	{ src = "https://github.com/farmergreg/vim-lastplace" },
 })
 -- colorscheme
-vim.g.lightline = { colorscheme = "everforest" }
-vim.g.everforest_transparent_background = 2
+require("everforest").setup({ transparent_background_level = 2 })
 vim.cmd.colorscheme("everforest")
 -- blink.cmp
 require("blink.cmp").setup({
 	keymap = { preset = "super-tab" },
 	completion = { documentation = { auto_show = true } },
 })
--- mini pick/files
+-- mini packs
+require("mini.snippets").setup()
+require("mini.statusline").setup()
 require("mini.pick").setup()
 require("mini.files").setup({ windows = { preview = true } })
 -- treesitter loader
@@ -62,13 +65,14 @@ require("mason-lspconfig").setup()
 require("mason-tool-installer").setup({
 	ensure_installed = {
 		"tree-sitter-cli",
+		"bashls",
 		"jsonls",
 		"lua_ls",
 		"stylua",
 		"rust_analyzer",
 		"ts_ls",
 		"tinymist",
-		-- "tombi",
+		"tombi",
 		"yamlls",
 	},
 	auto_update = true,
@@ -87,15 +91,15 @@ vim.lsp.config("jsonls", {
 vim.lsp.config("lua_ls", {
 	settings = {
 		Lua = {
-			runtime = {
-				version = "LuaJIT",
-				path = vim.split(package.path, ";"),
-			},
+			-- runtime = {
+			-- 	version = "LuaJIT",
+			-- 	path = vim.split(package.path, ";"),
+			-- },
 			diagnostics = { globals = { "vim" } },
-			workspace = {
-				library = vim.api.nvim_get_runtime_file("", true),
-				checkThirdParty = false,
-			},
+			-- workspace = {
+			-- 	library = vim.api.nvim_get_runtime_file("", true),
+			-- 	checkThirdParty = false,
+			-- },
 			format = { enable = false },
 		},
 	},
@@ -170,10 +174,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 -- nvim-treesitter Auto Update Packages
--- vim.api.nvim_create_autocmd("PackChanged", {
--- 	pattern = { "nvim-treesitter" },
--- 	callback = function()
--- 		vim.notify("Updating treesitter parsers", vim.log.levels.INFO)
--- 		require("nvim-treesitter").update(nil, { summary = true }):wait(30 * 1000)
--- 	end,
--- })
+vim.api.nvim_create_autocmd("PackChanged", {
+	pattern = { "nvim-treesitter" },
+	callback = function()
+		vim.notify("Updating treesitter parsers", vim.log.levels.INFO)
+		require("nvim-treesitter").update(nil, { summary = true }):wait(30 * 1000)
+	end,
+})
