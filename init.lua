@@ -38,8 +38,6 @@ vim.g.everforest_transparent_background = 2
 vim.cmd.colorscheme("everforest")
 -- blink.cmp
 require("blink.cmp").setup({
-	fuzzy = { implementation = "prefer_rust_with_warning" },
-	signature = { enabled = true },
 	keymap = { preset = "super-tab" },
 	completion = { documentation = { auto_show = true } },
 })
