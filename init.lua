@@ -53,6 +53,7 @@ vim.lsp.enable({
 	"rust-analyzer",
 	"jsonls",
 	"ts_ls",
+	"tombi",
 	"yamlls",
 })
 vim.diagnostic.config({ virtual_text = true })
