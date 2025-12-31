@@ -56,7 +56,7 @@ require("ts-query-loader").setup({
 	},
 })
 -- Mason
-require("mason").setup({ ensure_installed = { "tree-sitter-cli " } })
+require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"jsonls",
