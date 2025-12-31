@@ -79,6 +79,7 @@ vim.lsp.enable({
 	"jsonls",
 	"ts_ls",
 	"tombi",
+	"typst_lsp",
 	"yamlls",
 })
 vim.diagnostic.config({ virtual_text = true })
