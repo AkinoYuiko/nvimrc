@@ -29,6 +29,7 @@ vim.pack.add({
 	{ src = "https://github.com/Corn207/ts-query-loader.nvim" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
 	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.files" },
@@ -57,15 +58,19 @@ require("ts-query-loader").setup({
 })
 -- Mason
 require("mason").setup()
+require("mason-tool-installer").setup({
+	ensure_installed = { "tree-sitter-cli" },
+	auto_update = true,
+})
 require("mason-lspconfig").setup({
 	ensure_installed = {
+		"tinymist",
 		"jsonls",
 		"lua_ls",
 		"stylua",
 		"rust_analyzer",
 		"ts_ls",
 		-- "tombi",
-		"tinymist",
 		"yamlls",
 	},
 })
