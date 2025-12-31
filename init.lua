@@ -27,9 +27,10 @@ vim.pack.add({
 	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	-- { src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/nvim-mini/mini.pick" },
 	{ src = "https://github.com/nvim-mini/mini.files" },
-}, { confirm = false })
+})
 -- Packages config
 vim.g.lightline = { colorscheme = "everforest" }
 vim.g.everforest_transparent_background = 2
@@ -47,10 +48,34 @@ require("mini.files").setup({ windows = { preview = true } })
 ----------------------
 -- LSP Config --
 ----------------------
+vim.lsp.config("jsonls", {
+	settings = {
+		json = {
+			allowComments = true,
+			allowTrailingCommas = true,
+		},
+	},
+})
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+				path = vim.split(package.path, ";"),
+			},
+			diagnostics = { globals = { "vim" } },
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+				checkThirdParty = false,
+			},
+			format = { enable = false },
+		},
+	},
+})
 vim.lsp.enable({
 	"stylua",
 	"lua_ls",
-	"rust-analyzer",
+	"rust_analyzer",
 	"jsonls",
 	"ts_ls",
 	"tombi",
