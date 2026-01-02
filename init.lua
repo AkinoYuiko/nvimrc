@@ -45,8 +45,8 @@ require("lazy").setup({
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
-			local parsers = { "go", "rust", "json", "yaml", "toml", "nginx", "python", "typst", "typescript" }
-			require("nvim-treesitter").install(parsers)
+			-- local parsers = { "go", "rust", "json", "yaml", "toml", "nginx", "python", "typst", "typescript" }
+			-- require("nvim-treesitter").install(parsers)
 			vim.api.nvim_create_autocmd("FileType", {
 				callback = function()
 					if vim.bo.filetype ~= "" and vim.treesitter.query.get(vim.bo.filetype, "highlights") then
@@ -72,7 +72,7 @@ require("lazy").setup({
 				"rust_analyzer",
 				"ts_ls",
 				"tinymist",
-				"tombi",
+				-- "tombi", -- Not install by default.
 				"yamlls",
 			},
 		},
