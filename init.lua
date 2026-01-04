@@ -7,97 +7,67 @@ vim.opt.wrap = false
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 0
-vim.opt.mouse = ""
+vim.opt.mouse = "nv"
 vim.opt.scrolloff = 5
 vim.opt.signcolumn = "yes"
 vim.opt.winborder = "rounded"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.hlsearch = false
-vim.opt.incsearch = true
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldenable = false
 vim.opt.termguicolors = true
--- lazy.nvim --
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-	vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-end
-vim.opt.rtp:prepend(lazypath)
 -- Packages --
-require("lazy").setup({
-	{
-		"sainnhe/everforest",
-		config = function()
-			vim.g.everforest_background = "hard"
-			vim.g.everforest_transparent_background = 2
-			vim.cmd.colorscheme("everforest")
-		end,
-	},
-	{
-		"saghen/blink.cmp",
-		version = "1.*",
-		opts = { keymap = { preset = "super-tab" }, completion = { documentation = { auto_show = true } } },
-	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
-		config = function()
-			-- local parsers = { "go", "rust", "json", "yaml", "toml", "nginx", "python", "typst", "typescript" }
-			-- require("nvim-treesitter").install(parsers)
-			vim.api.nvim_create_autocmd("FileType", {
-				callback = function()
-					if vim.bo.filetype ~= "" and vim.treesitter.query.get(vim.bo.filetype, "highlights") then
-						vim.treesitter.start()
-						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-					end
-				end,
-			})
-		end,
-	},
-	{ "neovim/nvim-lspconfig" },
-	{ "mason-org/mason.nvim", opts = {} },
-	{
-		"mason-org/mason-lspconfig.nvim",
-		opts = {
-			---@type string[]
-			ensure_installed = {
-				-- "bashls",
-				-- "fish_lsp",
-				"jsonls",
-				"lua_ls",
-				"stylua",
-				"rust_analyzer",
-				"ts_ls",
-				"tinymist",
-				-- "tombi", -- Not install by default.
-				"yamlls",
-			},
-		},
-	},
-	{ "nvim-mini/mini.files", opts = { windows = { preview = true } } },
-	{ "nvim-mini/mini.icons", opts = {} },
-	{ "nvim-mini/mini.notify", opts = {} },
-	{ "nvim-mini/mini.pick", opts = {} },
-	{ "nvim-mini/mini.snippets", opts = {} },
-	{ "nvim-mini/mini.statusline", opts = {} },
-	{ "nvim-mini/mini.tabline", opts = {} },
-	{ "farmergreg/vim-lastplace", event = "BufReadPost" },
+vim.pack.add({
+	{ src = "https://github.com/sainnhe/everforest" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.completion" },
+	{ src = "https://github.com/nvim-mini/mini.files" },
+	{ src = "https://github.com/nvim-mini/mini.icons" },
+	{ src = "https://github.com/nvim-mini/mini.keymap" },
+	{ src = "https://github.com/nvim-mini/mini.notify" },
+	{ src = "https://github.com/nvim-mini/mini.pairs" },
+	{ src = "https://github.com/nvim-mini/mini.pick" },
+	{ src = "https://github.com/nvim-mini/mini.snippets" },
+	{ src = "https://github.com/nvim-mini/mini.surround" },
+	{ src = "https://github.com/nvim-mini/mini.statusline" },
+	{ src = "https://github.com/nvim-mini/mini.tabline" },
+	{ src = "https://github.com/farmergreg/vim-lastplace" },
+	{ src = "https://github.com/tpope/vim-sleuth" },
 })
+-- colorscheme
+vim.g.everforest_background = "hard"
+vim.g.everforest_transparent_background = 2
+vim.cmd.colorscheme("everforest")
+-- mini packs
+for _, mod in ipairs({ "completion", "icons", "notify", "pairs", "pick", "surround", "snippets", "statusline", "tabline" }) do
+	require("mini." .. mod).setup()
+end
+require("mini.files").setup({ windows = { preview = true } })
+local map_multistep = require("mini.keymap").map_multistep
+map_multistep("i", "<Tab>", { "pmenu_next" })
+map_multistep("i", "<S-Tab>", { "pmenu_prev" })
+map_multistep("i", "<CR>", { "pmenu_accept", "minipairs_cr" })
+-- nvim-treesitter
+-- local parsers = { "go", "rust", "json", "yaml", "toml", "nginx", "python", "typst", "typescript" }
+-- require("nvim-treesitter").instal(parsers)
+-- mason
+require("mason").setup()
+require("mason-lspconfig").setup()
 -- LSP Config --
 vim.lsp.config("jsonls", { settings = { json = { allowComments = true } } })
-vim.lsp.config(
-	"lua_ls",
-	{ settings = { Lua = { diagnostics = { globals = { "vim" } }, format = { enable = false } } } }
-)
--- vim.lsp.enable({ ... })
+vim.lsp.config("lua_ls", { settings = { Lua = { diagnostics = { globals = { "vim" } }, format = { enable = false } } } })
+-- vim.lsp.enable({ "jsonls", "lua_ls", "stylua", "rust_analyzer", "ts_ls", "tinymist", "tombi", "yamlls" })
 vim.diagnostic.config({ virtual_text = true })
 vim.filetype.add({ extension = { lsr = "conf" } }) -- .lsr as .conf
 -- Key Mapping --
 -- Format
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "format" })
+-- Update
+vim.keymap.set("n", "<leader>up", function()
+	vim.pack.update(nil, { force = true })
+end, { desc = "format" })
 -- Personal
 vim.keymap.set({ "n", "v", "o" }, ";", ":")
 vim.keymap.set({ "n", "v", "o" }, "H", "^")
@@ -106,9 +76,9 @@ vim.keymap.set("n", "<leader>m", "<cmd>set nu! nu?<cr>")
 vim.keymap.set("n", "<leader>w", "<cmd>set wrap! wrap?<cr>")
 vim.keymap.set("n", "<leader>l", "<cmd>set list! list?<cr>")
 -- System clipboard
--- vim.keymap.set({ "n", "v" }, "<leader>c", '"+y', { desc = "copy to system clipboard" })
--- vim.keymap.set({ "n", "v" }, "<leader>x", '"+d', { desc = "cut to system clipboard" })
--- vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "paste to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>c", '"+y', { desc = "copy to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>x", '"+d', { desc = "cut to system clipboard" })
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { desc = "paste to system clipboard" })
 -- Window switch
 -- vim.keymap.set('n', '<leader>ww', '<C-w>w', { desc = 'focus windows' })
 -- Line move
@@ -116,14 +86,10 @@ vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { desc = "Move line up" })
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
--- Resize Window
--- vim.keymap.set('n', '<C-Up>', ':resize +2<CR>', { desc = 'Increase window height' })
--- vim.keymap.set('n', '<C-Down>', ':resize -2<CR>', { desc = 'Decrease window height' })
--- vim.keymap.set('n', '<C-Left>', ':vertical resize -2<CR>', { desc = 'Decrease window width' })
--- vim.keymap.set('n', '<C-Right>', ':vertical resize +2<CR>', { desc = 'Increase window width' })
 -- File/Package keymaps
 vim.keymap.set("n", "<leader>e", ":lua MiniFiles.open()<CR>", { desc = "open file explorer" })
 vim.keymap.set("n", "<leader>f", ":Pick files<CR>", { desc = "open file picker" })
+vim.keymap.set("n", "<leader>g", ":Pick grep_live<CR>", { desc = "open grep picker" })
 vim.keymap.set("n", "<leader>h", ":Pick help<CR>", { desc = "open help picker" })
 vim.keymap.set("n", "<leader>b", ":Pick buffers<CR>", { desc = "open buffer picker" })
 vim.keymap.set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "diagnostic messages" })
@@ -150,5 +116,30 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
 	callback = function()
 		vim.highlight.on_yank({ timeout = 500 })
+	end,
+})
+-- treesitter
+local augroup = vim.api.nvim_create_augroup("nvim.treesitter", { clear = true })
+vim.api.nvim_create_autocmd("FileType", {
+	group = augroup,
+	callback = function(ev)
+		local lang = vim.treesitter.language.get_lang(ev.match)
+		if vim.treesitter.language.add(lang) then
+			if pcall(vim.treesitter.start, ev.buf, lang) then
+				vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				vim.wo.foldmethod = "expr"
+				vim.wo.foldenable = false
+				vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			end
+		end
+	end,
+})
+-- nvim-treesitter TSUpdate
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = augroup,
+	pattern = { "nvim-treesitter" },
+	callback = function()
+		vim.notify("Updating treesitter parsers", vim.log.levels.INFO)
+		require("nvim-treesitter").update(nil, { summary = true }):wait(30 * 1000)
 	end,
 })
