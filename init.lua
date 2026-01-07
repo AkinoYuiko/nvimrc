@@ -128,9 +128,9 @@ vim.api.nvim_create_autocmd("FileType", {
 		if lang and vim.treesitter.language.add(lang) then
 			if pcall(vim.treesitter.start, ev.buf, lang) then
 				vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-				vim.wo.foldmethod = "expr"
-				vim.wo.foldenable = false
 				vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+				vim.wo.foldmethod = "expr"
+				vim.wo.foldlevel = 99
 			end
 		end
 	end,
@@ -143,4 +143,9 @@ vim.api.nvim_create_autocmd("PackChanged", {
 		vim.notify("Updating treesitter parsers", vim.log.levels.INFO)
 		require("nvim-treesitter").update(nil, { summary = true }):wait(30 * 1000)
 	end,
+})
+-- auto recognize server_log.txt
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = "{client_log.txt, client_chat_log.txt, server_log.txt, server_chat_log.txt}",
+	command = "set filetype=log",
 })
