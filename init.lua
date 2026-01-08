@@ -22,7 +22,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/mason-org/mason.nvim" },
-	-- { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
 	{ src = "https://github.com/nvim-mini/mini.ai" },
 	{ src = "https://github.com/nvim-mini/mini.completion" },
 	{ src = "https://github.com/nvim-mini/mini.cmdline" },
@@ -35,12 +35,14 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-mini/mini.statusline" },
 	{ src = "https://github.com/nvim-mini/mini.tabline" },
 	{ src = "https://github.com/farmergreg/vim-lastplace" },
-	-- { src = "https://github.com/tpope/vim-sleuth" },
+	{ src = "https://github.com/Darazaki/indent-o-matic" },
 }, { confirm = false })
 -- Colorscheme
 vim.g.everforest_background = "hard"
-vim.g.everforest_transparent_background = 2
+vim.g.everforest_transparent_background = 1
 vim.cmd.colorscheme("everforest")
+-- Auto detect indents
+require("indent-o-matic").setup({}) -- sbdx
 -- Mini Packs Setup
 local mini_modules = { "ai", "completion", "cmdline", "icons", "notify", "pick", "snippets", "statusline", "tabline" }
 for _, mod in ipairs(mini_modules) do
@@ -58,19 +60,19 @@ if ok then
 end
 -- nvim-treesitter
 -- local parsers = { "go", "rust", "json", "yaml", "toml", "nginx", "python", "typst", "typescript" }
--- require("nvim-treesitter").instal(parsers)
+-- require("nvim-treesitter").install(parsers)
 -- Mason
 require("mason").setup()
--- require("mason-lspconfig").setup()
+vim.schedule(require("mason-lspconfig").setup)
 -- LSP Config --
 vim.lsp.config("jsonls", { settings = { json = { allowComments = true } } })
-vim.lsp.enable({ "emmylua_ls", "jsonls", "rust_analyzer", "stylua", "tinymist", "tombi", "ts_ls", "yamlls" })
+-- vim.lsp.enable({ "emmylua_ls", "jsonls", "rust_analyzer", "stylua", "tinymist", "tombi", "ts_ls", "yamlls" })
 vim.diagnostic.config({ virtual_text = true })
 vim.filetype.add({ extension = { lsr = "conf" } }) -- .lsr as .conf
 -- Key Mapping --
 local keymap_set = vim.keymap.set
 -- Format
-keymap_set("n", "<leader>lf", vim.lsp.buf.format, { desc = "format" })
+keymap_set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
 -- Update
 keymap_set("n", "<leader>up", function()
 	vim.pack.update(nil, { force = true })
@@ -117,8 +119,6 @@ end, { desc = "next diagnostic" })
 -- AutoCmds --
 local augroup_treesitter = vim.api.nvim_create_augroup("nvim.treesitter", { clear = true })
 local augroup_yank = vim.api.nvim_create_augroup("highlight-yank", { clear = true })
--- Auto Formatting
--- vim.api.nvim_create_autocmd("BufWritePre", { callback = function() lsp_buf.format() end, pattern = "*", })
 -- Highlight Yanked Texts
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "highlight copying text",
