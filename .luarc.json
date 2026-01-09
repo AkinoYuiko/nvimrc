@@ -4,9 +4,25 @@
   "diagnostics.globals": [
     "vim"
   ],
-  "workspace.library": [
-    "$VIMRUNTIME",
-    "$LLS_Addons/luvit"
-  ],
+  "workspace": {
+    "library": [
+      "$VIMRUNTIME",
+      "$LLS_Addons/luvit"
+    ],
+    "checkThirdParty": "Disable"
+  },
+  "diagnostics": {
+    "groupFileStatus": {
+      "strict": "Opened",
+      "strong": "Opened"
+    },
+    "groupSeverity": {
+      "strong": "Warning",
+      "strict": "Warning"
+    },
+    "unusedLocalExclude": [
+      "_*"
+    ]
+  },
   "format.enable": false
 }
