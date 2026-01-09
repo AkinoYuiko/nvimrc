@@ -74,11 +74,9 @@ vim.filetype.add({ extension = { lsr = "conf" } }) -- .lsr as .conf
 -- Key Mapping --
 local keymap_set = vim.keymap.set
 -- Format
-keymap_set("n", "<leader>lf", vim.lsp.buf.format, { desc = "Format" })
+keymap_set("n", "<leader>lf", function() vim.lsp.buf.format() end, { desc = "Format" })
 -- Update
-keymap_set("n", "<leader>up", function()
-	vim.pack.update(nil, { force = true })
-end, { desc = "Update packages" })
+keymap_set("n", "<leader>up", function() vim.pack.update(nil, { force = true }) end, { desc = "Update packages" })
 -- Personal
 keymap_set({ "n", "v" }, ";", ":")
 keymap_set({ "n", "v" }, "H", "^")
@@ -112,12 +110,8 @@ keymap_set("n", "gr", vim.lsp.buf.references, { desc = "Find references" })
 keymap_set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol" })
 keymap_set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP code action" })
 -- Fast diagnostic
-keymap_set("n", "[d", function()
-	vim.diagnostic.jump({ wrap = true, count = -1 })
-end, { desc = "prev diagnostic" })
-keymap_set("n", "]d", function()
-	vim.diagnostic.jump({ wrap = true, count = 1 })
-end, { desc = "next diagnostic" })
+keymap_set("n", "[d", function() vim.diagnostic.jump({ wrap = true, count = -1 }) end, { desc = "prev diagnostic" })
+keymap_set("n", "]d", function() vim.diagnostic.jump({ wrap = true, count = 1 }) end, { desc = "next diagnostic" })
 -- AutoCmds --
 local augroup_format = vim.api.nvim_create_augroup("vim.lsp.format", { clear = true })
 local augroup_treesitter = vim.api.nvim_create_augroup("nvim.treesitter", { clear = true })
@@ -125,15 +119,13 @@ local augroup_yank = vim.api.nvim_create_augroup("highlight-yank", { clear = tru
 -- Auto Formatting
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = augroup_format,
-	callback = function() vim.lsp.buf.format() end,
+	callback = function() vim.lsp.buf.format({ async = false }) end,
 })
 -- Highlight Yanked Texts
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "highlight copying text",
 	group = augroup_yank,
-	callback = function()
-		vim.highlight.on_yank({ timeout = 500 })
-	end,
+	callback = function() vim.highlight.on_yank({ timeout = 500 }) end,
 })
 -- treesitter
 local ts = vim.treesitter
@@ -161,9 +153,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 		vim.schedule(function()
 			local nvim_ts = require("nvim-treesitter")
 			local update_promise = nvim_ts.update(nil, { summary = true })
-			if update_promise and update_promise.wait then
-				update_promise:wait(30 * 1000)
-			end
+			if update_promise and update_promise.wait then update_promise:wait(30 * 1000) end
 		end)
 	end,
 })
