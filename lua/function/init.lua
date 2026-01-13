@@ -19,7 +19,7 @@ au('BufRead', {
 local function package_deffered_fn()
 	require('plugin')
 	-- chdir
-	uc('Chdir', function(args) require('function.chdir').chdir(args.args == 'silent') end, {
+	uc('Chdir', function(args) require('internal.chdir').chdir(args.args == 'silent') end, {
 		nargs = '?',
 		complete = function() return { 'silent' } end,
 	})
