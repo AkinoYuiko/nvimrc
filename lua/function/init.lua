@@ -18,13 +18,6 @@ au('BufRead', {
 
 local function package_deffered_fn()
 	require('plugin')
-	-- Colorscheme
-	require('everforest').setup({
-		background = 'hard',
-		transparent_background_level = 2,
-		show_eob = false,
-	})
-	vim.cmd.colorscheme('everforest')
 	-- chdir
 	uc('Chdir', function(args) require('function.chdir').chdir(args.args == 'silent') end, {
 		nargs = '?',
@@ -65,6 +58,14 @@ au('BufEnter', {
 	group = group,
 	once = true,
 	callback = function()
+		require('plugin.everforest')
+		-- Colorscheme
+		require('everforest').setup({
+			background = 'hard',
+			transparent_background_level = 2,
+			show_eob = false,
+		})
+		vim.cmd.colorscheme('everforest')
 		vim.defer_fn(package_deffered_fn, 0)
 		-- vim.defer_fn(function() end, 0)
 	end,
