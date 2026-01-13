@@ -112,20 +112,18 @@ keymap_set("n", "<leader>dd", vim.diagnostic.open_float, { desc = "diagnostic me
 keymap_set("n", "[d", function() vim.diagnostic.jump({ wrap = true, count = -1 }) end, { desc = "prev diagnostic" })
 keymap_set("n", "]d", function() vim.diagnostic.jump({ wrap = true, count = 1 }) end, { desc = "next diagnostic" })
 -- AutoCmds --
-local augroup_format = vim.api.nvim_create_augroup("vim.lsp.format", { clear = true })
-local augroup_treesitter = vim.api.nvim_create_augroup("nvim.treesitter", { clear = true })
-local augroup_yank = vim.api.nvim_create_augroup("highlight-yank", { clear = true })
 -- Auto Formatting
 vim.api.nvim_create_autocmd("BufWritePre", {
-	group = augroup_format,
+	group = vim.api.nvim_create_augroup("vim.lsp.format", { clear = true }),
 	callback = function() vim.lsp.buf.format({ async = false }) end,
 })
 -- Highlight Yanked Texts
 vim.api.nvim_create_autocmd("TextYankPost", {
-	group = augroup_yank,
+	group = vim.api.nvim_create_augroup("highlight-yank", { clear = true }),
 	callback = function() vim.highlight.on_yank({ timeout = 500 }) end,
 })
 -- treesitter
+local augroup_treesitter = vim.api.nvim_create_augroup("nvim.treesitter", { clear = true })
 local ts_lang = vim.treesitter.language
 vim.api.nvim_create_autocmd("FileType", {
 	group = augroup_treesitter,
