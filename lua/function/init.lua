@@ -25,20 +25,20 @@ local function package_deffered_fn()
 	})
 	-- Mini Packs Setup
 	local mini_modules = {
-		'ai',
-		'completion',
-		'cmdline',
-		'icons',
-		'notify',
-		'pick',
-		'snippets',
-		'statusline',
-		'tabline',
+		-- 'ai',
+		['completion'] = {},
+		['cmdline'] = {},
+		['files'] = { windows = { preview = true } },
+		['icons'] = {},
+		['notify'] = {},
+		['pick'] = {},
+		['snippets'] = {},
+		['statusline'] = {},
+		['tabline'] = {},
 	}
-	for _, mod in ipairs(mini_modules) do
-		require('mini.' .. mod).setup()
+	for mod, opts in pairs(mini_modules) do
+		require('mini.' .. mod).setup(opts)
 	end
-	require('mini.files').setup({ windows = { preview = true } })
 	local ok, mini_keymap = pcall(require, 'mini.keymap')
 	if ok then
 		local map_multistep = mini_keymap.map_multistep
@@ -48,6 +48,7 @@ local function package_deffered_fn()
 			map_multistep('i', '<CR>', { 'pmenu_accept', 'minipairs_cr' })
 		end
 	end
+	-- keymap
 	require('keymap')
 	-- Treesitter
 	require('function.treesitter')
