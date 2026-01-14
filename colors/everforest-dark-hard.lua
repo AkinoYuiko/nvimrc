@@ -63,13 +63,13 @@ h("MatchParen",{fg=c.orange,bold=true})
 -- Popup / Menu (官方对齐)
 --------------------------------------------------
 h("NormalFloat",{fg=c.fg,bg=c.bg0})
-h("FloatBorder",{fg=c.grey})               -- 官方无 bg
-
-h("Pmenu",{fg=c.fg,bg=c.bg0})             -- 补全菜单背景 bg0
+-- h("FloatBorder",{fg=c.grey})               -- 官方无 bg
+h("Pmenu",{fg=c.fg})
+-- h("Pmenu",{fg=c.fg,bg=c.bg0})             -- 补全菜单背景 bg0
 h("PmenuSel",{fg=c.bg0,bg=c.blue,bold=true})
 h("PmenuSbar",{bg=c.bg1})
 h("PmenuThumb",{bg=c.grey})
-h("PmenuBorder",{fg=c.grey})               -- 高亮定义，官方未显示边框
+-- h("PmenuBorder",{fg=c.grey})               -- 高亮定义，官方未显示边框
 
 --------------------------------------------------
 -- Search
@@ -165,10 +165,9 @@ h("MiniPickPrompt",{fg=c.blue,bold=true})
 h("MiniPickMatch",{fg=c.orange,bold=true})
 
 h("MiniFilesNormal",{fg=c.fg,bg=c.bg0})
-h("MiniFilesBorder",{fg=c.grey,bg=c.bg0})
+h("MiniFilesBorder",{fg=c.grey})
 h("MiniFilesTitle",{fg=c.blue,bold=true})
 
 h("MiniClueNormal",{fg=c.fg,bg=c.bg0})
 h("MiniClueBorder",{fg=c.grey,bg=c.bg0})
 h("MiniClueTitle",{fg=c.yellow,bold=true})
-
