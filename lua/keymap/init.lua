@@ -11,3 +11,7 @@ map.n({
 	-- invert_word
 	['<leader>iw'] = function() require('internal.invert_word').invert_word() end,
 })
+map.v({
+	-- surround
+	['S'] = function() require('internal.surround').add_surround() end,
+})
