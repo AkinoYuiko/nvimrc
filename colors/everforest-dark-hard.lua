@@ -1,13 +1,18 @@
 -- colors/everforest-dark-hard.lua
+-- Everforest Dark Hard
+-- Based on:
+--   1. sainnhe/everforest (official Vim version)
+--   2. neanias/everforest-nvim (official Neovim version)
+-- Transparent background level: 2
+
 vim.cmd('highlight clear')
 vim.o.termguicolors = true
 vim.g.colors_name = 'everforest-dark-hard'
 
---------------------------------------------------
--- Palette (官方 dark hard - 完整版)
---------------------------------------------------
+-----------------------------------------------------------------------
+-- Color palette (dark hard)
+-----------------------------------------------------------------------
 local c = {
-	-- 背景色 (Dark Hard)
 	bg_dim = '#1e2326',
 	bg0 = '#272e33',
 	bg1 = '#2e383c',
@@ -16,15 +21,11 @@ local c = {
 	bg4 = '#495156',
 	bg5 = '#4f5559',
 
-	-- 前景色
 	fg = '#d3c6aa',
-
-	-- 灰度色
 	grey0 = '#7a8478',
 	grey1 = '#859289',
 	grey2 = '#9da9a0',
 
-	-- 主题色
 	red = '#e67e80',
 	orange = '#e69875',
 	yellow = '#dbbc7f',
@@ -34,90 +35,109 @@ local c = {
 	purple = '#d699b6',
 }
 
-local h = function(g, o) vim.api.nvim_set_hl(0, g, o) end
+local h = function(group, opts) vim.api.nvim_set_hl(0, group, opts) end
 
---------------------------------------------------
--- Core UI (透明度=2)
---------------------------------------------------
-h('Normal', { fg = c.fg }) -- 透明背景
+-----------------------------------------------------------------------
+-- Core UI (unchanged)
+-----------------------------------------------------------------------
+h('Normal', { fg = c.fg })
 h('NormalNC', { fg = c.fg })
+h('NormalSB', { fg = c.fg })
 h('SignColumn', { fg = c.fg })
 h('EndOfBuffer', { fg = c.bg0 })
-
--- CursorLine 覆盖 SignColumn / NumberColumn
-h('CursorLine', { bg = c.bg1 })
-h('CursorLineSign', { bg = c.bg1 })
-h('CursorLineNr', { fg = c.yellow, bg = c.bg1, bold = true })
-
-h('Visual', { bg = c.bg2 })
+h('NonText', { fg = c.bg3 })
+h('Whitespace', { fg = c.bg3 })
 h('LineNr', { fg = c.grey1 })
 
--- StatusLine 和 StatusLineNC 背景改为透明 (透明度=2)
-h('StatusLine', { fg = c.fg, bg = 'NONE' })
-h('StatusLineNC', { fg = c.grey0, bg = 'NONE' })
-
--- Tabline 背景改为透明 (透明度=2)
-h('TabLine', { fg = c.grey2, bg = 'NONE' })
-h('TabLineSel', { fg = c.bg0, bg = c.red, bold = true })
-h('TabLineFill', { bg = 'NONE' })
-
-h('WinSeparator', { fg = c.bg3 })
-h('VertSplit', { link = 'WinSeparator' })
-
+h('CursorLine', { bg = c.bg1 })
+h('CursorLineNr', { fg = c.yellow, bg = c.bg1, bold = true })
+h('CursorLineSign', { bg = c.bg1 })
+h('CursorLineFold', { bg = c.bg1 })
+h('CursorColumn', { bg = c.bg1 })
 h('ColorColumn', { bg = c.bg1 })
 
+h('Visual', { bg = c.bg2 })
+h('VisualNOS', { bg = c.bg2 })
 h('Folded', { fg = c.grey1, bg = c.bg1 })
 h('FoldColumn', { fg = c.grey2, bg = c.bg1 })
-
 h('MatchParen', { fg = c.orange, bold = true })
+h('Conceal', { fg = c.grey1 })
 
-h('Conceal', { fg = c.grey1, bg = 'NONE' })
-h('Cursor', { reverse = true })
-h('lCursor', { link = 'Cursor' })
-h('CursorIM', { link = 'Cursor' })
-h('TermCursor', { link = 'Cursor' })
-h('TermCursorNC', { fg = c.fg, bg = c.bg1 })
+-----------------------------------------------------------------------
+-- Statusline / Tabline / Window separators
+-----------------------------------------------------------------------
 
---------------------------------------------------
--- Popup / Menu (官方对齐)
---------------------------------------------------
+h('StatusLine', { fg = c.fg })
+h('StatusLineNC', { fg = c.grey0 })
+
+h('TabLine', { fg = c.grey2 })
+h('TabLineSel', { fg = c.bg0, bg = c.red, bold = true })
+h('TabLineFill', { bg = c.bg0 })
+
+h('WinSeparator', { fg = c.bg3 })
+h('WinSeparatorNC', { fg = c.bg3 })
+h('VertSplit', { link = 'WinSeparator' })
+
+-----------------------------------------------------------------------
+-- Messages / Cmdline
+-----------------------------------------------------------------------
+
+h('MsgArea', { fg = c.fg })
+h('MsgSeparator', { fg = c.bg3 })
+
+h('ErrorMsg', { fg = c.red, bold = true })
+h('WarningMsg', { fg = c.yellow, bold = true })
+h('MoreMsg', { fg = c.yellow })
+h('ModeMsg', { fg = c.fg })
+h('Question', { fg = c.aqua, bold = true })
+
+-----------------------------------------------------------------------
+-- Floating windows / Popup menu
+-----------------------------------------------------------------------
+
 h('NormalFloat', { fg = c.fg, bg = c.bg0 })
 h('FloatBorder', { fg = c.grey1, bg = c.bg0 })
+h('FloatTitle', { fg = c.orange, bg = c.bg0, bold = true })
+h('FloatShadow', { bg = c.bg_dim })
+h('FloatShadowThrough', { bg = c.bg_dim })
+
 h('Pmenu', { fg = c.fg, bg = c.bg0 })
-h('PmenuSel', { fg = c.bg0, bg = c.blue, bold = true })
+h('PmenuSel', { fg = c.bg0, bg = c.green, bold = true })
 h('PmenuSbar', { bg = c.bg1 })
 h('PmenuThumb', { bg = c.grey1 })
+h('PmenuExtra', { fg = c.grey1, bg = c.bg0 })
+h('PmenuExtraSel', { fg = c.bg0, bg = c.green })
 
---------------------------------------------------
+-----------------------------------------------------------------------
 -- Search
---------------------------------------------------
-h('Search', { fg = c.bg0, bg = c.yellow })
-h('IncSearch', { fg = c.bg0, bg = c.orange })
+-----------------------------------------------------------------------
+h('Search', { fg = c.bg0, bg = c.green })
+h('IncSearch', { fg = c.bg0, bg = c.red })
 h('CurSearch', { link = 'IncSearch' })
 h('Substitute', { fg = c.bg0, bg = c.yellow })
 
---------------------------------------------------
--- Syntax (官方语义 - 完全对齐)
---------------------------------------------------
+-----------------------------------------------------------------------
+-- Syntax (classic Vim groups)
+-----------------------------------------------------------------------
 h('Comment', { fg = c.grey1, italic = true })
-
-h('Constant', { fg = c.aqua }) -- 官方: aqua
+h('Constant', { fg = c.aqua })
 h('String', { fg = c.green })
-h('Character', { fg = c.green }) -- 官方: green (与 String 一致)
+h('Character', { fg = c.green })
 h('Number', { fg = c.purple })
 h('Boolean', { fg = c.purple })
 h('Float', { fg = c.purple })
 
 h('Identifier', { fg = c.blue })
-h('Function', { fg = c.blue }) -- Official: green
+h('Function', { fg = c.green })
 
 h('Statement', { fg = c.red })
 h('Conditional', { fg = c.red })
 h('Repeat', { fg = c.red })
-h('Label', { fg = c.red })
-h('Operator', { fg = c.orange })
 h('Keyword', { fg = c.red })
 h('Exception', { fg = c.red })
+
+h('Label', { fg = c.orange })
+h('Operator', { fg = c.orange })
 
 h('PreProc', { fg = c.purple })
 h('Include', { fg = c.purple })
@@ -126,183 +146,252 @@ h('Macro', { fg = c.purple })
 h('PreCondit', { fg = c.purple })
 
 h('Type', { fg = c.yellow })
-h('StorageClass', { fg = c.yellow })
+h('StorageClass', { fg = c.orange })
 h('Structure', { fg = c.yellow })
 h('Typedef', { fg = c.yellow })
 
-h('Special', { fg = c.yellow }) -- 官方: yellow
-h('SpecialChar', { fg = c.yellow }) -- 官方: yellow
-h('Tag', { fg = c.yellow }) -- 官方: yellow
+h('Special', { fg = c.yellow })
+h('SpecialChar', { fg = c.yellow })
+h('Tag', { fg = c.orange })
 h('Delimiter', { fg = c.fg })
-h('SpecialComment', { fg = c.grey0, italic = true })
-h('Debug', { fg = c.orange })
 
 h('Underlined', { fg = c.blue, underline = true })
 h('Ignore', { fg = c.grey1 })
 h('Error', { fg = c.red, bold = true })
-h('Todo', { fg = c.bg0, bg = c.blue, bold = true }) -- 官方: bg=blue
+h('Todo', { fg = c.purple, bold = true })
 
---------------------------------------------------
--- Treesitter (官方语义映射 - 完全对齐)
---------------------------------------------------
+-----------------------------------------------------------------------
+-- Treesitter
+-----------------------------------------------------------------------
 h('@variable', { fg = c.fg })
-h('@variable.builtin', { fg = c.purple })
+h('@variable.builtin', { fg = c.yellow })
 h('@variable.parameter', { fg = c.fg })
 h('@variable.member', { fg = c.fg })
 
-h('@constant', { fg = c.aqua }) -- 继承 Constant
-h('@constant.builtin', { fg = c.purple })
-h('@constant.macro', { fg = c.purple })
+h('@constant', { fg = c.aqua })
+h('@constant.builtin', { fg = c.aqua })
+h('@constant.macro', { fg = c.aqua })
 
-h('@module', { fg = c.blue })
-h('@label', { fg = c.red })
+h('@module', { fg = c.yellow })
+h('@namespace', { link = '@module' })
 
 h('@string', { fg = c.green })
-h('@string.regexp', { fg = c.aqua })
-h('@string.escape', { fg = c.aqua })
-h('@string.special', { fg = c.aqua })
-h('@character', { fg = c.green }) -- 继承 Character
-h('@character.special', { fg = c.aqua })
+h('@string.escape', { fg = c.orange })
+h('@string.special', { fg = c.yellow })
+h('@string.regexp', { fg = c.green })
+h('@string.special.url', { fg = c.blue, underline = true })
 
 h('@number', { fg = c.purple })
-h('@number.float', { fg = c.purple })
 h('@boolean', { fg = c.purple })
 
-h('@function', { fg = c.blue }) -- Official: green for function
-h('@function.builtin', { fg = c.blue })
-h('@function.call', { fg = c.grren })
-h('@function.macro', { fg = c.blue })
-h('@function.method', { fg = c.blue })
-h('@function.method.call', { fg = c.blue })
+h('@function', { fg = c.green })
+h('@function.builtin', { fg = c.green })
+h('@function.method', { fg = c.green })
+h('@constructor', { fg = c.green })
 
-h('@constructor', { fg = c.yellow })
 h('@operator', { fg = c.orange })
 
 h('@keyword', { fg = c.red })
-h('@keyword.function', { fg = c.red })
-h('@keyword.operator', { fg = c.red })
+h('@keyword.conditional', { fg = c.red })
+h('@keyword.repeat', { fg = c.red })
 h('@keyword.return', { fg = c.red })
 h('@keyword.exception', { fg = c.red })
+
+h('@conditional', { link = '@keyword.conditional' })
+h('@repeat', { link = '@keyword.repeat' })
+h('@exception', { link = '@keyword.exception' })
 
 h('@type', { fg = c.yellow })
 h('@type.builtin', { fg = c.yellow })
 h('@type.definition', { fg = c.yellow })
-h('@type.qualifier', { fg = c.red })
+h('@type.qualifier', { fg = c.orange })
 
+h('@attribute', { fg = c.yellow })
 h('@property', { fg = c.fg })
-h('@attribute', { fg = c.purple })
+
+h('@punctuation', { fg = c.grey2 })
+h('@punctuation.bracket', { fg = c.fg })
 
 h('@comment', { link = 'Comment' })
-h('@comment.error', { fg = c.bg0, bg = c.red })
-h('@comment.warning', { fg = c.bg0, bg = c.yellow })
-h('@comment.todo', { fg = c.bg0, bg = c.blue })
-h('@comment.note', { fg = c.bg0, bg = c.aqua })
 
-h('@punctuation.delimiter', { fg = c.fg })
-h('@punctuation.bracket', { fg = c.fg })
-h('@punctuation.special', { fg = c.orange })
+-----------------------------------------------------------------------
+-- Tree-sitter full compatibility (new TS + legacy TS + nvim-treesitter)
+-----------------------------------------------------------------------
 
-h('@tag', { fg = c.yellow }) -- 官方: yellow
+-- ===============================================================
+-- New Tree-sitter markup (Neovim >= 0.9)
+-- ===============================================================
+h('@markup', { fg = c.fg })
+h('@markup.strong', { bold = true })
+h('@markup.italic', { italic = true })
+h('@markup.strikethrough', { strikethrough = true })
+h('@markup.underline', { underline = true })
+
+h('@markup.heading', { fg = c.orange, bold = true })
+h('@markup.heading.1', { fg = c.red, bold = true })
+h('@markup.heading.2', { fg = c.orange, bold = true })
+h('@markup.heading.3', { fg = c.yellow, bold = true })
+h('@markup.heading.4', { fg = c.green, bold = true })
+h('@markup.heading.5', { fg = c.aqua, bold = true })
+h('@markup.heading.6', { fg = c.blue, bold = true })
+
+h('@markup.quote', { fg = c.grey1, italic = true })
+h('@markup.math', { fg = c.blue })
+h('@markup.raw', { fg = c.green })
+h('@markup.raw.block', { fg = c.green })
+h('@markup.raw.inline', { fg = c.green })
+
+h('@markup.list', { fg = c.orange })
+h('@markup.list.checked', { fg = c.green })
+h('@markup.list.unchecked', { fg = c.grey1 })
+
+h('@markup.link', { fg = c.blue })
+h('@markup.link.label', { fg = c.blue })
+h('@markup.link.url', { fg = c.blue, underline = true })
+
+-- ===============================================================
+-- Tags (HTML / JSX / TSX / XML)
+-- ===============================================================
+h('@tag', { fg = c.red })
 h('@tag.attribute', { fg = c.yellow })
-h('@tag.delimiter', { fg = c.fg })
+h('@tag.delimiter', { fg = c.grey1 })
 
---------------------------------------------------
--- LSP Semantic Tokens
---------------------------------------------------
+-- ===============================================================
+-- Diff / Git (Tree-sitter based)
+-- ===============================================================
+h('@diff.plus', { fg = c.green })
+h('@diff.minus', { fg = c.red })
+h('@diff.delta', { fg = c.blue })
+
+-- ===============================================================
+-- Injected languages
+-- ===============================================================
+h('@injection', { fg = c.fg })
+h('@injection.content', { fg = c.fg })
+h('@injection.language', { fg = c.purple })
+
+-- ===============================================================
+-- Conceal / Spell
+-- ===============================================================
+h('@conceal', { fg = c.grey1 })
+h('@spell', { fg = c.red, underline = true })
+
+-- ===============================================================
+-- Legacy Tree-sitter (@text.*) used by nvim-treesitter
+-- ===============================================================
+h('@text', { link = '@markup' })
+h('@text.strong', { link = '@markup.strong' })
+h('@text.emphasis', { link = '@markup.italic' })
+h('@text.underline', { link = '@markup.underline' })
+h('@text.strike', { link = '@markup.strikethrough' })
+
+h('@text.title', { link = '@markup.heading' })
+h('@text.literal', { link = '@markup.raw' })
+h('@text.uri', { link = '@markup.link.url' })
+h('@text.reference', { link = '@markup.link' })
+h('@text.math', { link = '@markup.math' })
+h('@text.environment', { link = '@markup.environment' })
+h('@text.environment.name', { link = '@markup.environment' })
+
+h('@text.todo', { link = 'Todo' })
+h('@text.warning', { fg = c.yellow, bold = true })
+h('@text.danger', { fg = c.red, bold = true })
+h('@text.note', { fg = c.blue, bold = true })
+
+-- ===============================================================
+-- nvim-treesitter context / UI helpers
+-- ===============================================================
+h('TreesitterContext', { bg = c.bg1 })
+h('TreesitterContextLineNumber', { fg = c.grey2 })
+
+-- ===============================================================
+-- Rainbow delimiters (if enabled)
+-- ===============================================================
+h('RainbowDelimiterRed', { fg = c.red })
+h('RainbowDelimiterOrange', { fg = c.orange })
+h('RainbowDelimiterYellow', { fg = c.yellow })
+h('RainbowDelimiterGreen', { fg = c.green })
+h('RainbowDelimiterBlue', { fg = c.blue })
+h('RainbowDelimiterViolet', { fg = c.purple })
+h('RainbowDelimiterCyan', { fg = c.aqua })
+
+
+-----------------------------------------------------------------------
+-- LSP semantic tokens
+-----------------------------------------------------------------------
 h('@lsp.type.class', { link = '@type' })
-h('@lsp.type.decorator', { link = '@function' })
-h('@lsp.type.enum', { link = '@type' })
-h('@lsp.type.enumMember', { link = '@constant' })
-h('@lsp.type.function', { link = '@function' })
 h('@lsp.type.interface', { link = '@type' })
-h('@lsp.type.macro', { link = '@macro' })
+h('@lsp.type.enum', { link = '@type' })
+h('@lsp.type.function', { link = '@function' })
 h('@lsp.type.method', { link = '@function.method' })
-h('@lsp.type.namespace', { link = '@module' })
-h('@lsp.type.parameter', { link = '@variable.parameter' })
-h('@lsp.type.property', { link = '@property' })
-h('@lsp.type.struct', { link = '@type' })
-h('@lsp.type.type', { link = '@type' })
-h('@lsp.type.typeParameter', { link = '@type.definition' })
+h('@lsp.type.decorator', { link = '@attribute' })
+h('@lsp.type.event', { link = '@type' })
 h('@lsp.type.variable', { link = '@variable' })
+h('@lsp.type.property', { link = '@property' })
 
---------------------------------------------------
--- Diff / Git
---------------------------------------------------
-h('DiffAdd', { fg = c.green, bg = 'NONE' })
-h('DiffChange', { fg = c.blue, bg = 'NONE' })
-h('DiffDelete', { fg = c.red, bg = 'NONE' })
-h('DiffText', { fg = c.yellow, bg = c.bg1, bold = true })
-
-h('diffAdded', { fg = c.green })
-h('diffRemoved', { fg = c.red })
-h('diffChanged', { fg = c.blue })
-h('diffFile', { fg = c.orange })
-h('diffNewFile', { fg = c.yellow })
-h('diffLine', { fg = c.blue })
-
---------------------------------------------------
--- Diagnostics / Messages
---------------------------------------------------
+-----------------------------------------------------------------------
+-- LSP UI
+-----------------------------------------------------------------------
 h('DiagnosticError', { fg = c.red })
 h('DiagnosticWarn', { fg = c.yellow })
 h('DiagnosticInfo', { fg = c.blue })
 h('DiagnosticHint', { fg = c.aqua })
 h('DiagnosticOk', { fg = c.green })
 
-h('DiagnosticSignError', { fg = c.red, bg = 'NONE' })
-h('DiagnosticSignWarn', { fg = c.yellow, bg = 'NONE' })
-h('DiagnosticSignInfo', { fg = c.blue, bg = 'NONE' })
-h('DiagnosticSignHint', { fg = c.aqua, bg = 'NONE' })
+h('DiagnosticSignError', { fg = c.red })
+h('DiagnosticSignWarn', { fg = c.yellow })
+h('DiagnosticSignInfo', { fg = c.blue })
+h('DiagnosticSignHint', { fg = c.aqua })
+
+h('DiagnosticVirtualTextError', { fg = c.red })
+h('DiagnosticVirtualTextWarn', { fg = c.yellow })
+h('DiagnosticVirtualTextInfo', { fg = c.blue })
+h('DiagnosticVirtualTextHint', { fg = c.aqua })
 
 h('DiagnosticUnderlineError', { undercurl = true, sp = c.red })
 h('DiagnosticUnderlineWarn', { undercurl = true, sp = c.yellow })
 h('DiagnosticUnderlineInfo', { undercurl = true, sp = c.blue })
 h('DiagnosticUnderlineHint', { undercurl = true, sp = c.aqua })
 
-h('ErrorMsg', { fg = c.red, bold = true })
-h('WarningMsg', { fg = c.yellow, bold = true })
-h('MoreMsg', { fg = c.yellow, bold = true })
-h('Question', { fg = c.aqua, bold = true })
-h('ModeMsg', { fg = c.fg, bold = true })
+h('LspReferenceText', { bg = c.bg2 })
+h('LspReferenceRead', { bg = c.bg2 })
+h('LspReferenceWrite', { bg = c.bg2 })
 
---------------------------------------------------
--- Spell
---------------------------------------------------
-h('SpellBad', { undercurl = true, sp = c.red })
-h('SpellCap', { undercurl = true, sp = c.yellow })
-h('SpellRare', { undercurl = true, sp = c.blue })
-h('SpellLocal', { undercurl = true, sp = c.aqua })
+h('LspInlayHint', { fg = c.grey0 })
+h('LspCodeLens', { fg = c.grey0 })
+h('LspSignatureActiveParameter', { fg = c.orange, bold = true })
 
---------------------------------------------------
--- Misc UI
---------------------------------------------------
-h('Title', { fg = c.orange, bold = true })
-h('Directory', { fg = c.blue })
-h('SpecialKey', { fg = c.grey1 })
-h('NonText', { fg = c.bg3 })
-h('Whitespace', { fg = c.bg3 })
+-----------------------------------------------------------------------
+-- Diff / Git
+-----------------------------------------------------------------------
+h('DiffAdd', { fg = c.green })
+h('DiffChange', { fg = c.blue })
+h('DiffDelete', { fg = c.red })
+h('DiffText', { fg = c.yellow, bg = c.bg1, bold = true })
 
+-----------------------------------------------------------------------
+-- Quickfix
+-----------------------------------------------------------------------
 h('QuickFixLine', { fg = c.bg0, bg = c.blue, bold = true })
 h('qfLineNr', { fg = c.yellow })
 h('qfFileName', { fg = c.blue })
 
---------------------------------------------------
--- mini.nvim (官方视觉对齐)
---------------------------------------------------
+-----------------------------------------------------------------------
+-- mini.nvim UI
+-----------------------------------------------------------------------
 
--- MiniStatusline (官方配色: Normal=green, Insert=blue, Visual=yellow)
+-- Statusline
 h('MiniStatuslineModeNormal', { fg = c.bg0, bg = c.green, bold = true })
 h('MiniStatuslineModeInsert', { fg = c.bg0, bg = c.blue, bold = true })
-h('MiniStatuslineModeVisual', { fg = c.bg0, bg = c.orange, bold = true }) -- 官方: yellow
+h('MiniStatuslineModeVisual', { fg = c.bg0, bg = c.yellow, bold = true })
 h('MiniStatuslineModeReplace', { fg = c.bg0, bg = c.red, bold = true })
-h('MiniStatuslineModeCommand', { fg = c.bg0, bg = c.yellow, bold = true })
-h('MiniStatuslineModeOther', { fg = c.bg0, bg = c.purple, bold = true })
+h('MiniStatuslineModeCommand', { fg = c.bg0, bg = c.aqua, bold = true })
 h('MiniStatuslineDevinfo', { fg = c.fg, bg = c.bg2 })
 h('MiniStatuslineFilename', { fg = c.fg, bg = c.bg1 })
 h('MiniStatuslineFileinfo', { fg = c.fg, bg = c.bg2 })
-h('MiniStatuslineInactive', { fg = c.grey0, bg = c.bg0 })
+h('MiniStatuslineInactive', { fg = c.grey0 })
 
--- MiniTabline (完整版 - 包含 Modified 状态)
+-- Tabline
 h('MiniTablineCurrent', { fg = c.fg, bg = c.bg4, bold = true })
 h('MiniTablineVisible', { fg = c.fg, bg = c.bg2 })
 h('MiniTablineHidden', { fg = c.grey1, bg = c.bg2 })
@@ -310,83 +399,53 @@ h('MiniTablineModifiedCurrent', { fg = c.blue, bg = c.bg4, bold = true })
 h('MiniTablineModifiedVisible', { fg = c.blue, bg = c.bg2 })
 h('MiniTablineModifiedHidden', { fg = c.grey1, bg = c.bg2 })
 h('MiniTablineFill', { bg = c.bg0 })
-h('MiniTablineTabpagesection', { fg = c.bg0, bg = c.blue, bold = true })
 
--- MiniIndentscope
-h('MiniIndentscopeSymbol', { fg = c.grey1 })
-h('MiniIndentscopePrefix', { nocombine = true })
-
--- MiniNotify
-h('MiniNotifyNormal', { fg = c.fg, bg = c.bg2 })
-h('MiniNotifyBorder', { fg = c.grey1, bg = c.bg2 })
+-- Notify
+h('MiniNotifyNormal', { fg = c.fg, bg = c.bg0 })
+h('MiniNotifyBorder', { fg = c.grey1, bg = c.bg0 })
 h('MiniNotifyTitle', { fg = c.blue, bold = true })
 
--- MiniPick
+-- Pick
 h('MiniPickNormal', { fg = c.fg, bg = c.bg0 })
 h('MiniPickBorder', { fg = c.grey1, bg = c.bg0 })
-h('MiniPickBorderBusy', { fg = c.yellow, bg = c.bg0 })
-h('MiniPickBorderText', { fg = c.aqua, bg = c.bg0 })
-h('MiniPickPrompt', { fg = c.blue, bg = c.bg0, bold = true })
+h('MiniPickPrompt', { fg = c.blue, bold = true })
 h('MiniPickMatchCurrent', { bg = c.bg2 })
-h('MiniPickMatchMarked', { fg = c.orange, bold = true })
-h('MiniPickMatchRanges', { fg = c.yellow, bold = true })
-h('MiniPickHeader', { fg = c.grey1 })
-h('MiniPickIconDirectory', { fg = c.blue })
-h('MiniPickIconFile', { fg = c.fg })
 h('MiniPickPreviewLine', { bg = c.bg2 })
 h('MiniPickPreviewRegion', { bg = c.bg3 })
 
--- MiniFiles
+-- Files
 h('MiniFilesNormal', { fg = c.fg, bg = c.bg0 })
 h('MiniFilesBorder', { fg = c.grey1, bg = c.bg0 })
-h('MiniFilesBorderModified', { fg = c.yellow, bg = c.bg0 })
 h('MiniFilesCursorLine', { bg = c.bg2 })
 h('MiniFilesDirectory', { fg = c.blue })
 h('MiniFilesFile', { fg = c.fg })
 h('MiniFilesTitle', { fg = c.blue, bold = true })
 h('MiniFilesTitleFocused', { fg = c.bg0, bg = c.blue, bold = true })
 
--- MiniClue
+-- Clue
 h('MiniClueNormal', { fg = c.fg, bg = c.bg0 })
 h('MiniClueBorder', { fg = c.grey1, bg = c.bg0 })
-h('MiniClueDescGroup', { fg = c.yellow, bold = true })
-h('MiniClueDescSeparator', { fg = c.grey1 })
-h('MiniClueNextKey', { fg = c.green, bold = true })
-h('MiniClueNextKeyWithPostkeys', { fg = c.aqua, bold = true })
-h('MiniClueSeparator', { fg = c.grey1 })
 h('MiniClueTitle', { fg = c.blue, bold = true })
+h('MiniClueDescGroup', { fg = c.yellow, bold = true })
+h('MiniClueNextKey', { fg = c.green, bold = true })
 
--- MiniJump
+-- Indentscope
+h('MiniIndentscopeSymbol', { fg = c.grey1 })
+h('MiniIndentscopePrefix', { nocombine = true })
+
+-- Cursorword
+h('MiniCursorword', { underline = true })
+h('MiniCursorwordCurrent', { underline = true })
+
+-- Completion
+h('MiniCompletionActiveParameter', { underline = true })
+
+-- Jump
 h('MiniJump', { fg = c.bg0, bg = c.purple, bold = true })
-
--- MiniStarter
-h('MiniStarterCurrent', { nocombine = true })
-h('MiniStarterFooter', { fg = c.grey0, italic = true })
-h('MiniStarterHeader', { fg = c.green, bold = true })
-h('MiniStarterInactive', { fg = c.grey0 })
-h('MiniStarterItem', { fg = c.fg })
-h('MiniStarterItemBullet', { fg = c.grey1 })
-h('MiniStarterItemPrefix', { fg = c.yellow })
-h('MiniStarterSection', { fg = c.blue, bold = true })
-h('MiniStarterQuery', { fg = c.aqua })
-
--- MiniDiff
-h('MiniDiffSignAdd', { fg = c.green, bg = 'NONE' })
-h('MiniDiffSignChange', { fg = c.blue, bg = 'NONE' })
-h('MiniDiffSignDelete', { fg = c.red, bg = 'NONE' })
-h('MiniDiffOverAdd', { bg = c.bg1 })
-h('MiniDiffOverChange', { bg = c.bg1 })
-h('MiniDiffOverContext', { bg = c.bg1 })
-h('MiniDiffOverDelete', { bg = c.bg1 })
-
--- MiniHipatterns
-h('MiniHipatternsFixme', { fg = c.bg0, bg = c.red, bold = true })
-h('MiniHipatternsHack', { fg = c.bg0, bg = c.yellow, bold = true })
-h('MiniHipatternsTodo', { fg = c.bg0, bg = c.blue, bold = true })
-h('MiniHipatternsNote', { fg = c.bg0, bg = c.aqua, bold = true })
+h('MiniJump2dSpot', { fg = c.orange, bold = true, nocombine = true })
 
 --------------------------------------------------
--- 额外常用插件支持
+-- Extra packs support
 --------------------------------------------------
 
 -- Telescope (如果使用)
@@ -422,3 +481,64 @@ h('WhichKeyDesc', { fg = c.fg })
 h('WhichKeySeparator', { fg = c.grey1 })
 h('WhichKeyFloat', { bg = c.bg0 })
 h('WhichKeyBorder', { fg = c.grey1, bg = c.bg0 })
+
+-----------------------------------------------------------------------
+-- Completion UI (nvim-cmp, snippets, ghost text)
+-----------------------------------------------------------------------
+
+-- Completion menu base
+h('CmpItemAbbr', { fg = c.fg })
+h('CmpItemAbbrDeprecated', { fg = c.grey1, strikethrough = true })
+h('CmpItemAbbrMatch', { fg = c.blue, bold = true })
+h('CmpItemAbbrMatchFuzzy', { fg = c.blue, bold = true })
+
+h('CmpItemMenu', { fg = c.grey1 })
+
+-- Kind highlighting (align with LSP / Treesitter semantics)
+h('CmpItemKindText', { fg = c.fg })
+h('CmpItemKindMethod', { fg = c.green })
+h('CmpItemKindFunction', { fg = c.green })
+h('CmpItemKindConstructor', { fg = c.green })
+
+h('CmpItemKindField', { fg = c.fg })
+h('CmpItemKindVariable', { fg = c.fg })
+h('CmpItemKindProperty', { fg = c.fg })
+
+h('CmpItemKindClass', { fg = c.yellow })
+h('CmpItemKindInterface', { fg = c.yellow })
+h('CmpItemKindStruct', { fg = c.yellow })
+h('CmpItemKindEnum', { fg = c.yellow })
+h('CmpItemKindEnumMember', { fg = c.aqua })
+
+h('CmpItemKindModule', { fg = c.yellow })
+h('CmpItemKindNamespace', { fg = c.yellow })
+
+h('CmpItemKindKeyword', { fg = c.red })
+h('CmpItemKindOperator', { fg = c.orange })
+
+h('CmpItemKindConstant', { fg = c.aqua })
+h('CmpItemKindValue', { fg = c.aqua })
+
+h('CmpItemKindString', { fg = c.green })
+h('CmpItemKindNumber', { fg = c.purple })
+h('CmpItemKindBoolean', { fg = c.purple })
+
+h('CmpItemKindFile', { fg = c.blue })
+h('CmpItemKindFolder', { fg = c.blue })
+
+h('CmpItemKindSnippet', { fg = c.purple })
+
+-- Documentation window (fully align with NormalFloat)
+h('CmpDocumentation', { link = 'NormalFloat' })
+h('CmpDocumentationBorder', { link = 'FloatBorder' })
+
+-- Ghost text (inline suggestion)
+h('CmpGhostText', { fg = c.grey0, italic = true })
+
+-- Snippet placeholders (LuaSnip / VSCode style)
+h('SnippetTabstop', { fg = c.orange, underline = true })
+h('SnippetPlaceholder', { fg = c.orange, underline = true })
+
+-- Fallbacks for older configs
+h('CmpItemKindDefault', { fg = c.fg })
+
