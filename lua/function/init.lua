@@ -8,14 +8,13 @@ au('TextYankPost', {
 })
 
 au('BufRead', {
-	group = vim.api.nvim_create_augroup('last-place', { clear = true }),
 	callback = function()
-		local ft = vim.bo.filetype
-		if ft == 'gitcommit' then return end
-		-- Last Place
-		vim.cmd.setlocal('formatoptions-=ro')
-		local pos = vim.fn.getpos('\'"')
-		if pos[2] > 0 and pos[2] <= vim.fn.line('$') then vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] - 1 }) end
+		local fname = vim.fn.expand('%:t')
+		if not fname:match('^COMMIT_EDITMSG$') then
+			vim.cmd.setlocal('formatoptions-=ro')
+			local pos = vim.fn.getpos('\'"')
+			if pos[2] > 0 and pos[2] <= vim.fn.line('$') then vim.api.nvim_win_set_cursor(0, { pos[2], pos[3] - 1 }) end
+		end
 	end,
 })
 
@@ -42,7 +41,7 @@ au('BufEnter', {
 	once = true,
 	callback = function()
 		-- vim.cmd.colorscheme('everforest-dark-hard')
-		require("plugin.everforest")
+		require('plugin.everforest')
 		vim.defer_fn(package_deffered_fn, 0)
 		vim.defer_fn(internal_defferer_fn, 0)
 	end,
