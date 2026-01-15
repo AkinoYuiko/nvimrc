@@ -1,11 +1,9 @@
 -- Packages --
 vim.pack.add({
-	-- { src = 'https://github.com/neanias/everforest-nvim' },
 	{ src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
 	{ src = 'https://github.com/neovim/nvim-lspconfig' },
 	{ src = 'https://github.com/mason-org/mason.nvim' },
 	{ src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
-	-- { src = 'https://github.com/nvim-mini/mini.ai' },
 	{ src = 'https://github.com/nvim-mini/mini.completion' },
 	{ src = 'https://github.com/nvim-mini/mini.cmdline' },
 	{ src = 'https://github.com/nvim-mini/mini.files' },
@@ -17,12 +15,10 @@ vim.pack.add({
 	{ src = 'https://github.com/nvim-mini/mini.statusline' },
 	{ src = 'https://github.com/nvim-mini/mini.tabline' },
 	{ src = 'https://github.com/j-hui/fidget.nvim' },
-	-- { src = "https://github.com/farmergreg/vim-lastplace" },
 	{ src = 'https://github.com/Darazaki/indent-o-matic' },
 }, { confirm = false })
 -- Mini Packs Setup
 local mini_modules = {
-	-- 'ai',
 	['completion'] = {},
 	['cmdline'] = {},
 	['files'] = { windows = { preview = true } },
