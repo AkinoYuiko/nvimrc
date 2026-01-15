@@ -8,10 +8,10 @@ au('TextYankPost', {
 })
 
 au('BufRead', {
-	group = vim.api.nvim_create_augroup("last-place",{clear=true}),
+	group = vim.api.nvim_create_augroup('last-place', { clear = true }),
 	callback = function()
 		local ft = vim.bo.filetype
-		if ft == "gitcommit" then return end
+		if ft == 'gitcommit' then return end
 		-- Last Place
 		vim.cmd.setlocal('formatoptions-=ro')
 		local pos = vim.fn.getpos('\'"')
@@ -19,8 +19,7 @@ au('BufRead', {
 	end,
 })
 
-local function package_deffered_fn()
-	require('plugin')
+local function internal_defferer_fn()
 	-- chdir
 	uc('Chdir', function(args) require('internal.chdir').chdir(args.args == 'silent') end, {
 		nargs = '?',
@@ -28,6 +27,11 @@ local function package_deffered_fn()
 	})
 	-- keymap
 	require('keymap')
+	-- experimental feat: ext_ui
+	require('vim._extui').enable({})
+end
+local function package_deffered_fn()
+	require('plugin')
 	-- Treesitter
 	require('function.treesitter')
 	-- Mason/LSP
@@ -37,9 +41,8 @@ au('BufEnter', {
 	group = group,
 	once = true,
 	callback = function()
-		-- require('plugin.everforest')
-		vim.cmd.colorscheme("everforest-dark-hard")
+		vim.cmd.colorscheme('everforest-dark-hard')
 		vim.defer_fn(package_deffered_fn, 0)
-		-- vim.defer_fn(function() end, 0)
+		vim.defer_fn(internal_defferer_fn, 0)
 	end,
 })
