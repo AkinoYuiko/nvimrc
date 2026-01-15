@@ -67,7 +67,7 @@ h('VertSplit', { link = 'WinSeparator' })
 h('ColorColumn', { bg = c.bg1 })
 
 h('Folded', { fg = c.grey1, bg = c.bg1 })
-h('FoldColumn', { fg = c.grey1 })
+h('FoldColumn', { fg = c.grey2, bg = c.bg1 })
 
 h('MatchParen', { fg = c.orange, bold = true })
 
@@ -97,19 +97,19 @@ h('CurSearch', { link = 'IncSearch' })
 h('Substitute', { fg = c.bg0, bg = c.yellow })
 
 --------------------------------------------------
--- Syntax (官方语义)
+-- Syntax (官方语义 - 完全对齐)
 --------------------------------------------------
-h('Comment', { fg = c.grey0, italic = true })
+h('Comment', { fg = c.grey1, italic = true })
 
-h('Constant', { fg = c.orange })
+h('Constant', { fg = c.aqua }) -- 官方: aqua
 h('String', { fg = c.green })
-h('Character', { fg = c.aqua })
+h('Character', { fg = c.green }) -- 官方: green (与 String 一致)
 h('Number', { fg = c.purple })
 h('Boolean', { fg = c.purple })
 h('Float', { fg = c.purple })
 
 h('Identifier', { fg = c.blue })
-h('Function', { fg = c.green })
+h('Function', { fg = c.blue }) -- Official: green
 
 h('Statement', { fg = c.red })
 h('Conditional', { fg = c.red })
@@ -130,9 +130,9 @@ h('StorageClass', { fg = c.yellow })
 h('Structure', { fg = c.yellow })
 h('Typedef', { fg = c.yellow })
 
-h('Special', { fg = c.orange })
-h('SpecialChar', { fg = c.orange })
-h('Tag', { fg = c.orange })
+h('Special', { fg = c.yellow }) -- 官方: yellow
+h('SpecialChar', { fg = c.yellow }) -- 官方: yellow
+h('Tag', { fg = c.yellow }) -- 官方: yellow
 h('Delimiter', { fg = c.fg })
 h('SpecialComment', { fg = c.grey0, italic = true })
 h('Debug', { fg = c.orange })
@@ -140,17 +140,17 @@ h('Debug', { fg = c.orange })
 h('Underlined', { fg = c.blue, underline = true })
 h('Ignore', { fg = c.grey1 })
 h('Error', { fg = c.red, bold = true })
-h('Todo', { fg = c.bg0, bg = c.yellow, bold = true })
+h('Todo', { fg = c.bg0, bg = c.blue, bold = true }) -- 官方: bg=blue
 
 --------------------------------------------------
--- Treesitter (官方语义映射)
+-- Treesitter (官方语义映射 - 完全对齐)
 --------------------------------------------------
 h('@variable', { fg = c.fg })
 h('@variable.builtin', { fg = c.purple })
 h('@variable.parameter', { fg = c.fg })
 h('@variable.member', { fg = c.fg })
 
-h('@constant', { fg = c.orange })
+h('@constant', { fg = c.aqua }) -- 继承 Constant
 h('@constant.builtin', { fg = c.purple })
 h('@constant.macro', { fg = c.purple })
 
@@ -161,19 +161,19 @@ h('@string', { fg = c.green })
 h('@string.regexp', { fg = c.aqua })
 h('@string.escape', { fg = c.aqua })
 h('@string.special', { fg = c.aqua })
-h('@character', { fg = c.aqua })
+h('@character', { fg = c.green }) -- 继承 Character
 h('@character.special', { fg = c.aqua })
 
 h('@number', { fg = c.purple })
 h('@number.float', { fg = c.purple })
 h('@boolean', { fg = c.purple })
 
-h('@function', { fg = c.green })
+h('@function', { fg = c.blue }) -- Official: green for function
 h('@function.builtin', { fg = c.blue })
-h('@function.call', { fg = c.green })
-h('@function.macro', { fg = c.green })
-h('@function.method', { fg = c.green })
-h('@function.method.call', { fg = c.green })
+h('@function.call', { fg = c.grren })
+h('@function.macro', { fg = c.blue })
+h('@function.method', { fg = c.blue })
+h('@function.method.call', { fg = c.blue })
 
 h('@constructor', { fg = c.yellow })
 h('@operator', { fg = c.orange })
@@ -202,7 +202,7 @@ h('@punctuation.delimiter', { fg = c.fg })
 h('@punctuation.bracket', { fg = c.fg })
 h('@punctuation.special', { fg = c.orange })
 
-h('@tag', { fg = c.orange })
+h('@tag', { fg = c.yellow }) -- 官方: yellow
 h('@tag.attribute', { fg = c.yellow })
 h('@tag.delimiter', { fg = c.fg })
 
@@ -261,7 +261,7 @@ h('DiagnosticUnderlineHint', { undercurl = true, sp = c.aqua })
 
 h('ErrorMsg', { fg = c.red, bold = true })
 h('WarningMsg', { fg = c.yellow, bold = true })
-h('MoreMsg', { fg = c.green, bold = true })
+h('MoreMsg', { fg = c.yellow, bold = true })
 h('Question', { fg = c.aqua, bold = true })
 h('ModeMsg', { fg = c.fg, bold = true })
 
@@ -290,13 +290,13 @@ h('qfFileName', { fg = c.blue })
 -- mini.nvim (官方视觉对齐)
 --------------------------------------------------
 
--- MiniStatusline (官方配色: Normal=green, Insert=blue, Visual=orange)
+-- MiniStatusline (官方配色: Normal=green, Insert=blue, Visual=yellow)
 h('MiniStatuslineModeNormal', { fg = c.bg0, bg = c.green, bold = true })
 h('MiniStatuslineModeInsert', { fg = c.bg0, bg = c.blue, bold = true })
-h('MiniStatuslineModeVisual', { fg = c.bg0, bg = c.orange, bold = true })
+h('MiniStatuslineModeVisual', { fg = c.bg0, bg = c.orange, bold = true }) -- 官方: yellow
 h('MiniStatuslineModeReplace', { fg = c.bg0, bg = c.red, bold = true })
 h('MiniStatuslineModeCommand', { fg = c.bg0, bg = c.yellow, bold = true })
-h('MiniStatuslineModeOther', { fg = c.bg0, bg = c.aqua, bold = true })
+h('MiniStatuslineModeOther', { fg = c.bg0, bg = c.purple, bold = true })
 h('MiniStatuslineDevinfo', { fg = c.fg, bg = c.bg2 })
 h('MiniStatuslineFilename', { fg = c.fg, bg = c.bg1 })
 h('MiniStatuslineFileinfo', { fg = c.fg, bg = c.bg2 })
