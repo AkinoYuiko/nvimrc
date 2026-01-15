@@ -4,6 +4,7 @@ local cmd = map.cmd
 if cmd == nil then return end
 
 map.n({
+	['<space>'] = '<Nop>',
 	['W'] = cmd('w'),
 	['Q'] = cmd('q'),
 	['B'] = cmd('bd'),
