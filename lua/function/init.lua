@@ -36,7 +36,7 @@ local function package_deffered_fn()
 	require('function.lsp')
 end
 
-au('BufEnter', {
+au('VimEnter', {
 	group = group,
 	once = true,
 	callback = function()

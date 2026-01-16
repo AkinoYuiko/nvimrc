@@ -35,3 +35,10 @@ if ok then
 	end
 end
 -- require('keymap.mini')
+-- Disable mini.completion in snacks
+vim.api.nvim_create_augroup('user_mini_snacks', { clear = true })
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = 'snacks_picker_input',
+	group = 'user_mini_snacks',
+	callback = function() vim.b.minicompletion_disable = true end,
+})

@@ -1,4 +1,5 @@
 require('keymap.remap')
+require('keymap.snacks')
 require('core.keymap').map({
 	-- { '<F5>', function() require('internal.code_running').running(false) end, desc = 'code running (center)' },
 	-- { '<F10>', function() require('internal.code_running').running(true) end, desc = 'code running (side)' },
