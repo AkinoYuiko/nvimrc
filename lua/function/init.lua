@@ -33,7 +33,7 @@ local function package_deffered_fn()
 	-- Treesitter
 	require('function.treesitter')
 	-- Mason/LSP
-	require('function.mason_lsp')
+	require('function.lsp')
 end
 
 au('BufEnter', {
