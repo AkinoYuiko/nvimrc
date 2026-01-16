@@ -1,5 +1,6 @@
 local M = {}
 
+---@param keys table
 M.map = function(keys)
 	for _, map in ipairs(keys) do
 		local opts = { desc = map.desc }
@@ -16,8 +17,9 @@ M.map = function(keys)
 	end
 end
 
+---@param cmd string
 M.cmd = function(cmd)
-	if type(cmd) == 'string' then return '<cmd>' .. cmd .. '<cr>' end
+	 return '<cmd>' .. cmd .. '<cr>'
 end
 
 return M
