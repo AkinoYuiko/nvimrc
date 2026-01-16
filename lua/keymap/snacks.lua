@@ -7,6 +7,7 @@ local keys = {
 	-- { '<leader>n', function() Snacks.picker.notifications() end, desc = 'Notification History' },
 	-- { '<leader>e', function() Snacks.explorer() end, desc = 'File Explorer' },
 	-- find
+	{ '<leader>f', function() Snacks.picker.files() end, desc = 'Find Files' },
 	-- { '<leader>fb', function() Snacks.picker.buffers() end, desc = 'Buffers' },
 	-- { '<leader>fc', function() Snacks.picker.files({ cwd = vim.fn.stdpath('config') }) end, desc = 'Find Config File' },
 	-- { '<leader>ff', function() Snacks.picker.files() end, desc = 'Find Files' },
@@ -97,8 +98,16 @@ local keys = {
 	-- 	end,
 	-- },
 }
-local keymap_set = vim.keymap.set
 for _, map in ipairs(keys) do
-	if type(map) ~= 'table' then return end
-	keymap_set(map.mode or 'n', map[1], map[2], { desc = map.desc })
+	local opts = { desc = map.desc }
+	if map.silent ~= nil then opts.silent = map.silent end
+	if map.noremap ~= nil then
+		opts.noremap = map.noremap
+	else
+		opts.noremap = true
+	end
+	if map.expr ~= nil then opts.expr = map.expr end
+
+	local mode = map.mode or 'n'
+	vim.keymap.set(mode, map[1], map[2], opts)
 end
