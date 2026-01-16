@@ -2,13 +2,11 @@ vim.pack.add({
 	{ src = 'https://github.com/folke/snacks.nvim' },
 }, { confirm = false })
 require('snacks').setup({
-	animate = { enabled = true },
 	bigfile = { enabled = true },
 	-- dashboard = { enabled = true },
 	explorer = { enabled = true },
 	indent = { enabled = true },
 	input = { enabled = true },
-	layout = { enabled = true },
 	notifier = {
 		enabled = true,
 		timeout = 3000,
