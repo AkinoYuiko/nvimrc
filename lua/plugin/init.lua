@@ -13,7 +13,7 @@ require('mason-lspconfig').setup()
 -- fidget
 require('fidget').setup()
 -- indent-o-matic
-require('indent-o-matic').setup({})
+-- require('indent-o-matic').setup({})
 -- mini.packs
 require('plugin.mini')
 -- Snacks
