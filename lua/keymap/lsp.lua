@@ -5,9 +5,9 @@ if cmd == nil then return end
 
 map.n({
 	-- LSP keymaps
-	['gd'] = vim.lsp.buf.definition,
-	['gD'] = vim.lsp.buf.declaration,
-	['gi'] = vim.lsp.buf.implementation,
+	-- ['gd'] = vim.lsp.buf.definition,
+	-- ['gD'] = vim.lsp.buf.declaration,
+	-- ['gi'] = vim.lsp.buf.implementation,
 	-- ['gr'] = vim.lsp.buf.references,
 	-- remap <leader>K to hover()
 	['<leader>k'] = vim.lsp.buf.hover,
