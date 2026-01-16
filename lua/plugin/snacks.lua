@@ -13,11 +13,33 @@ require('snacks').setup({
 		enabled = true,
 		timeout = 3000,
 	},
+	quickfile = { enabled = true },
+	rename = { enabled = true },
+	scope = { enabled = true },
+	scroll = {
+		enabled = true,
+		animate = {
+			duration = { step = 6, total = 60 },
+		},
+		animate_repeat = {
+			delay = 30,
+			duration = { step = 3, total = 30 },
+		},
+	},
+	statuscolumn = { enabled = true },
+	words = { enabled = true },
+	styles = {
+		notification = {
+			-- wo = { wrap = true } -- Wrap notifications
+		},
+	},
+	toggle = { enabled = true },
+	zen = { enabled = true },
 	picker = {
 		sources = {
 			files = {
-				hidden = true,
-				ignored = true,
+				hidden = false,
+				ignored = false,
 				win = {
 					input = {
 						keys = {
@@ -48,8 +70,8 @@ require('snacks').setup({
 				},
 			},
 			grep = {
-				hidden = true,
-				ignored = true,
+				hidden = false,
+				ignored = false,
 				win = {
 					input = {
 						keys = {
@@ -105,16 +127,6 @@ require('snacks').setup({
 					'**/.node-gyp/**',
 				},
 			},
-		},
-	},
-	quickfile = { enabled = true },
-	scope = { enabled = true },
-	scroll = { enabled = true },
-	statuscolumn = { enabled = true },
-	words = { enabled = true },
-	styles = {
-		notification = {
-			-- wo = { wrap = true } -- Wrap notifications
 		},
 	},
 })
