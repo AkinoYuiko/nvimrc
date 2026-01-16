@@ -12,6 +12,6 @@ require('fidget').setup()
 -- indent-o-matic
 require('indent-o-matic').setup({})
 -- mini.packs
--- require('plugin.mini')
+require('plugin.mini')
 -- Snacks
 require('plugin.snacks')
