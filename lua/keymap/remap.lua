@@ -11,7 +11,7 @@ map({
 	{ 'B', cmd('bd') },
 	-- {'ca', cmd('silent %y+'),},
 	{ '<leader>sc', cmd('set spell! spell?') },
-	{'<leader>sl', cmd('set list! list?'),},
+	{ '<leader>sl', cmd('set list! list?') },
 	{ '<leader>sm', cmd('set number! number?') },
 	{ '<leader>sw', cmd('set wrap! wrap?') },
 	{ '<leader><cr>', cmd('noh') },
@@ -57,4 +57,5 @@ map({
 	{ '<c-l>', '<Right>', mode = { 'i', 'c' } },
 	{ '<c-a>', '<Home>', mode = { 'i', 'c' } },
 	{ '<c-e>', '<End>', mode = { 'i', 'c' } },
+	{ '<leader>G', cmd('Gitui'), desc = 'Open gitui' },
 })
