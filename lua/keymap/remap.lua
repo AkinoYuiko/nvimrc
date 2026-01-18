@@ -57,5 +57,4 @@ map({
 	{ '<c-l>', '<Right>', mode = { 'i', 'c' } },
 	{ '<c-a>', '<Home>', mode = { 'i', 'c' } },
 	{ '<c-e>', '<End>', mode = { 'i', 'c' } },
-	{ '<leader>G', cmd('Gitui'), desc = 'Open gitui' },
 })
