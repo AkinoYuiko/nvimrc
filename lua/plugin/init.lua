@@ -3,15 +3,15 @@ vim.pack.add({
 	'https://github.com/nvim-treesitter/nvim-treesitter',
 	'https://github.com/neovim/nvim-lspconfig',
 	'https://github.com/mikinovation/nvim-gitui',
-	-- 'https://github.com/mason-org/mason.nvim',
-	-- 'https://github.com/mason-org/mason-lspconfig.nvim',
+	'https://github.com/mason-org/mason.nvim',
+	'https://github.com/mason-org/mason-lspconfig.nvim',
 	-- 'https://github.com/j-hui/fidget.nvim',
 	-- 'https://github.com/vigoux/notifier.nvim',
 	-- 'https://github.com/Darazaki/indent-o-matic',
 }, { confirm = false })
 -- mason
--- require('mason').setup()
--- require('mason-lspconfig').setup()
+require('mason').setup()
+require('mason-lspconfig').setup()
 -- notifier
 -- require('notifier').setup({})
 -- fidget
