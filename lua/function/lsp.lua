@@ -1,17 +1,18 @@
--- customized by mason ang mason-lspconfig due to cross-platform usage
--- local lsp_tbl = {
+-- only enable necessary lsp
+-- others are handled by mason ang mason-lspconfig due to cross-platform usage
+local lsp_tbl = {
 -- 	'bashls',
--- 	'emmylua_ls',
+	'emmylua_ls',
 -- 	'fish_lsp',
--- 	'jsonls',
--- 	'rust_analyzer',
--- 	'stylua',
+	'jsonls',
+	'rust_analyzer',
+	'stylua',
 -- 	'tinymist',
--- 	'tombi',
--- 	'ts_ls',
--- 	'yamlls',
--- }
--- vim.lsp.enable(lsp_tbl)
+	'tombi',
+	-- 'ts_ls',
+	'yamlls',
+}
+vim.lsp.enable(lsp_tbl)
 vim.diagnostic.config({ virtual_text = true })
 vim.filetype.add({ extension = { ['lsr'] = 'conf' } }) -- .lsr as .conf
 -- set lsp key bindings
