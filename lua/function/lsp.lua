@@ -22,8 +22,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	group = lsp_group,
 	callback = function(args)
 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-		-- Auto-format ("lint") on save.
-		-- Usually not needed if server supports "textDocument/willSaveWaitUntil".
+		if not client then return end
 		if
 			not client:supports_method('textDocument/willSaveWaitUntil')
 			and client:supports_method('textDocument/formatting')
