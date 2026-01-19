@@ -1,8 +1,8 @@
 require('core.keymap').map({
 	-- File/Package keymaps
-	-- { '<leader>e', ':lua MiniFiles.open()<CR>', desc = 'open mini.files' },
-	-- { '<leader>f', ':Pick files<CR>', desc = 'open mini.pick' },
-	-- { '<leader>g', ':Pick grep_live<CR>', desc = 'open mini.pick grep' },
-	-- { '<leader>h', ':Pick help<CR>', desc = 'open mini.pick help' },
-	-- { '<leader>b', ':Pick buffers<CR>', desc = 'open mini.pick buffers' },
+	-- { '<leader>e', '<cmd>lua MiniFiles.open()<cr>', desc = 'open mini.files' },
+	-- { '<leader>f', '<cmd>Pick files<cr>', desc = 'open mini.pick' },
+	-- { '<leader>g', '<cmd>Pick grep_live<cr>', desc = 'open mini.pick grep' },
+	-- { '<leader>h', '<cmd>Pick help<cr>', desc = 'open mini.pick help' },
+	-- { '<leader>b', '<cmd>Pick buffers<cr>', desc = 'open mini.pick buffers' },
 })

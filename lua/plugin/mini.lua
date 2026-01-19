@@ -1,15 +1,4 @@
-vim.pack.add({
-	'https://github.com/nvim-mini/mini.completion',
-	'https://github.com/nvim-mini/mini.cmdline',
-	-- 'https://github.com/nvim-mini/mini.files',
-	-- 'https://github.com/nvim-mini/mini.icons',
-	'https://github.com/nvim-mini/mini.keymap',
-	-- 'https://github.com/nvim-mini/mini.notify',
-	-- 'https://github.com/nvim-mini/mini.pick',
-	'https://github.com/nvim-mini/mini.snippets',
-	'https://github.com/nvim-mini/mini.statusline',
-	'https://github.com/nvim-mini/mini.tabline',
-}, { confirm = false })
+vim.pack.add({ 'https://github.com/nvim-mini/mini.nvim' }, { confirm = false })
 -- Mini Packs Setup
 local mini_modules = {
 	['completion'] = {},
@@ -17,7 +6,7 @@ local mini_modules = {
 	-- ['files'] = { windows = { preview = true } },
 	-- ['icons'] = {},
 	-- ['notify'] = {},
-	-- ['pick'] = {},
+	['pick'] = {},
 	['snippets'] = {},
 	['statusline'] = {},
 	['tabline'] = {},
@@ -34,7 +23,7 @@ if ok then
 		map_multistep('i', '<CR>', { 'pmenu_accept', 'minipairs_cr' })
 	end
 end
--- require('keymap.mini')
+require('keymap.mini')
 -- Disable mini.completion in snacks
 vim.api.nvim_create_augroup('user_mini_snacks', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
