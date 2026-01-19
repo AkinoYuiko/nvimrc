@@ -46,5 +46,8 @@ au('VimEnter', {
 		vim.defer_fn(internal_defferer_fn, 0)
 	end,
 })
-
+-- load colorscheme and snacks
+require('plugin.everforest')
+require('plugin.snacks')
+-- load treesitter autocmd
 require('function.treesitter')
