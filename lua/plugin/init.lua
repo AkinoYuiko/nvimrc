@@ -11,12 +11,10 @@ vim.pack.add({
 require('mason').setup()
 require('mason-lspconfig').setup()
 -- fidget
-require('fidget').setup({
-	notification = {
-		override_vim_notify = true,
-	},
-})
+require('fidget').setup({ notification = { override_vim_notify = true } })
 -- mini.packs
 require('plugin.mini')
 -- which-key
 require('which-key').setup({ preset = 'modern' })
+-- noice
+require('plugin.noice')

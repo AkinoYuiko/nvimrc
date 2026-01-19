@@ -3,5 +3,5 @@ vim.g.mapleader = ' '
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 -- experimental feat: ext_ui
-require('vim._extui').enable({})
+-- require('vim._extui').enable({})
 require('core.options')
