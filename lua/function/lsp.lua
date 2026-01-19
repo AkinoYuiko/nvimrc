@@ -1,13 +1,13 @@
 -- only enable necessary lsp
 -- others are handled by mason ang mason-lspconfig due to cross-platform usage
 local lsp_tbl = {
--- 	'bashls',
+	-- 'bashls',
 	'emmylua_ls',
--- 	'fish_lsp',
+	-- 'fish_lsp',
 	'jsonls',
 	'rust_analyzer',
 	'stylua',
--- 	'tinymist',
+	-- 'tinymist',
 	'tombi',
 	-- 'ts_ls',
 	'yamlls',

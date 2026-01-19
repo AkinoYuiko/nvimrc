@@ -18,8 +18,6 @@ M.map = function(keys)
 end
 
 ---@param cmd string
-M.cmd = function(cmd)
-	 return '<cmd>' .. cmd .. '<cr>'
-end
+M.cmd = function(cmd) return '<cmd>' .. cmd .. '<cr>' end
 
 return M
