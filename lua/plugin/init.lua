@@ -8,6 +8,7 @@ vim.pack.add({
 	-- 'https://github.com/j-hui/fidget.nvim',
 	-- 'https://github.com/vigoux/notifier.nvim',
 	-- 'https://github.com/Darazaki/indent-o-matic',
+	'https://github.com/folke/which-key.nvim',
 }, { confirm = false })
 -- mason
 require('mason').setup()
@@ -27,3 +28,4 @@ require('plugin.mini')
 -- Snacks
 -- require('plugin.snacks')
 -- require('nvim-gitui').setup({ keymaps = { n = '<leader>G' } })
+require('which-key').setup()
