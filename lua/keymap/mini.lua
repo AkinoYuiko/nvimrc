@@ -1,8 +1,9 @@
 require('core.keymap').map({
 	-- File/Package keymaps
-	-- { '<leader>e', '<cmd>lua MiniFiles.open()<cr>', desc = 'open mini.files' },
-	-- { '<leader>f', '<cmd>Pick files<cr>', desc = 'open mini.pick' },
-	-- { '<leader>g', '<cmd>Pick grep_live<cr>', desc = 'open mini.pick grep' },
-	-- { '<leader>h', '<cmd>Pick help<cr>', desc = 'open mini.pick help' },
-	-- { '<leader>b', '<cmd>Pick buffers<cr>', desc = 'open mini.pick buffers' },
+	{ '<leader>e', function() MiniFiles.open() end, desc = 'open mini.files' },
+	{ '<leader>f', function() MiniPick.builtin.files() end, desc = 'open mini.pick' },
+	{ '<leader>/', function() MiniPick.builtin.grep_live() end, desc = 'open mini.pick grep' },
+	{ '<leader>h', function() MiniPick.builtin.help() end, desc = 'open mini.pick help' },
+	{ '<leader>b', function() MiniPick.builtin.buffers() end, desc = 'open mini.pick buffers' },
+	{ '<leader>:', function() MiniExtra.pickers.history() end, desc = 'open mini.pick buffers' },
 })
