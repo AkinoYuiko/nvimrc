@@ -5,6 +5,7 @@ vim.pack.add({
 
 require('noice').setup({
 	views = { cmdline_popup = { position = { row = '25%', col = '50%' } } },
+	messages = { view_search = false },
 	lsp = {
 		override = {
 			['vim.lsp.util.convert_input_to_markdown_lines'] = true,
