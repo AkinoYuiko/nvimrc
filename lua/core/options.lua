@@ -8,7 +8,6 @@ opt.expandtab = true
 opt.shiftwidth = 0
 opt.tabstop = 2
 opt.mouse = 'nv'
-opt.cmdheight = 0
 opt.pumheight = 15
 opt.scrolloff = 8
 opt.sidescrolloff = 8
