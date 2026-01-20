@@ -1,4 +1,4 @@
-vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' })
+vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' }, { confirm = false })
 vim.api.nvim_create_autocmd('PackChanged', {
 	group = vim.api.nvim_create_augroup('nvim-treesitter', { clear = true }),
 	pattern = { 'nvim-treesitter' },
