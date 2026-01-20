@@ -33,3 +33,4 @@ opt.inccommand = 'split'
 opt.ignorecase = true
 opt.smartcase = true
 opt.hlsearch = false
+opt.termguicolors = true
