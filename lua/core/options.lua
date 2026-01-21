@@ -31,7 +31,8 @@ opt.fillchars = {
 	eob = ' ',
 }
 opt.list = true
-opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
+-- opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
+opt.listchars = 'tab:» ,nbsp:+,trail:·,extends:→,precedes:←'
 opt.inccommand = 'split'
 opt.ignorecase = true
 opt.smartcase = true
