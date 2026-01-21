@@ -1,14 +1,30 @@
-vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' }, { confirm = false })
-require('util.treesitter').get_installed(true)
-vim.api.nvim_create_autocmd('PackChanged', {
-	group = vim.api.nvim_create_augroup('nvim-treesitter', { clear = true }),
-	pattern = { 'nvim-treesitter' },
-	callback = function()
-		vim.notify('Updating treesitter parsers', vim.log.levels.INFO)
-		vim.schedule(function()
-			local update_promise = require('nvim-treesitter').update(nil, { summary = true })
-			if update_promise and update_promise.wait then update_promise:wait(30 * 1000) end
-			require('util.treesitter').get_installed(true)
-		end)
+local au = vim.api.nvim_create_autocmd
+local group = vim.api.nvim_create_augroup('nvim-treesitter', { clear = true })
+vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' }, {
+	confirm = false,
+	load = function(pack)
+		-- nvim-treesitter
+		au('VimEnter', {
+			group = group,
+			once = true,
+			callback = function()
+				vim.schedule(function()
+					vim.cmd.packadd(pack.spec.name)
+					momo.treesitter.get_installed(true)
+					au('PackChanged', {
+						group = group,
+						pattern = { 'nvim-treesitter' },
+						callback = function()
+							vim.notify('Updating treesitter parsers', vim.log.levels.INFO)
+							vim.schedule(function()
+								local update_promise = require('nvim-treesitter').update(nil, { summary = true })
+								if update_promise and update_promise.wait then update_promise:wait(30 * 1000) end
+								momo.treesitter.get_installed(true)
+							end)
+						end,
+					})
+				end)
+			end,
+		})
 	end,
 })
