@@ -10,3 +10,4 @@ vim.api.nvim_create_autocmd('PackChanged', {
 		end)
 	end,
 })
+require('util.treesitter').get_installed(true)
