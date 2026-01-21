@@ -40,7 +40,7 @@ au('VimEnter', {
 	callback = function()
 		vim.defer_fn(function()
 			-- chdir
-			uc('Chdir', function(args) require('internal.chdir').chdir(args.args == 'silent') end, {
+			uc('Chdir', function(args) require('function.chdir').chdir(args.args == 'silent') end, {
 				nargs = '?',
 				complete = function() return { 'silent' } end,
 			})

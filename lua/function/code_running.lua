@@ -1,4 +1,4 @@
-local win = require('internal.util.window')
+local win = require('function.util.window')
 local api = vim.api
 local infos = {}
 
