@@ -3,6 +3,7 @@ vim.pack.add({ 'https://github.com/nvim-mini/mini.nvim' }, { confirm = false })
 local mini_modules = {
 	['completion'] = {},
 	['cmdline'] = {},
+	['diff'] = {},
 	['extra'] = {},
 	['files'] = { windows = { preview = true } },
 	-- ['icons'] = {},
@@ -16,7 +17,7 @@ for mod, opts in pairs(mini_modules) do
 	require('mini.' .. mod).setup(opts)
 end
 -- copied from LazyVim, to handle skip_opts
-require('internal.util.mini').pairs({
+require('util.mini').pairs({
 	modes = { insert = true, command = true, terminal = false },
 	skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
 	skip_ts = { 'string' },
