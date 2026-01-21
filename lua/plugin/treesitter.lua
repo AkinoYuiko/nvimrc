@@ -1,4 +1,5 @@
 vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' }, { confirm = false })
+require('util.treesitter').get_installed(true)
 vim.api.nvim_create_autocmd('PackChanged', {
 	group = vim.api.nvim_create_augroup('nvim-treesitter', { clear = true }),
 	pattern = { 'nvim-treesitter' },
@@ -7,7 +8,7 @@ vim.api.nvim_create_autocmd('PackChanged', {
 		vim.schedule(function()
 			local update_promise = require('nvim-treesitter').update(nil, { summary = true })
 			if update_promise and update_promise.wait then update_promise:wait(30 * 1000) end
+			require('util.treesitter').get_installed(true)
 		end)
 	end,
 })
-require('util.treesitter').get_installed(true)
