@@ -18,18 +18,18 @@ map({
 	{ '<leader>w', cmd('set wrap! wrap?') },
 	{ '<leader><cr>', cmd('noh') },
 	-- {'<leader><leader>', '/<++><CR>:noh<CR>"_c4l',},
-	{ 'j', 'gj', noremap = true },
-	{ 'k', 'gk', noremap = true },
-	{ 'J', '<c-d>', noremap = true },
-	{ 'K', '<c-u>', noremap = true },
+	{ 'j', 'gj' },
+	{ 'k', 'gk' },
+	{ 'J', '<c-d>' },
+	{ 'K', '<c-u>' },
 	-- window
 	{ '<C-h>', '<C-w>h' },
 	{ '<C-j>', '<C-w>j' },
 	{ '<C-k>', '<C-w>k' },
 	{ '<C-l>', '<C-w>l' },
 	-- Keep current search result centered on the screen
-	-- { 'n', 'nzz', noremap = true },
-	-- { 'N', 'Nzz', noremap = true },
+	-- { 'n', 'nzz' },
+	-- { 'N', 'Nzz' },
 	-- stay in visual after <,>
 	{ '<', '<gv', mode = 'v' },
 	{ '>', '>gv', mode = 'v' },
@@ -45,8 +45,8 @@ map({
 	-- update all packs
 	{ '<leader>up', function() vim.pack.update(nil, { force = true }) end },
 	-- Line Move
-	{ 'J', "<cmd>m '>+1<CR>gv=gv", mode = 'v' },
-	{ 'K', "<cmd>m '<-2<CR>gv=gv", mode = 'v' },
+	{ 'J', ":m '>+1<cr>gv=gv", mode = 'v', silent = true },
+	{ 'K', ":m '<-2<cr>gv=gv", mode = 'v', silent = true },
 	-- fast Norm in visual
 	{ 'N', ':norm ', mode = { 'v' } },
 	-- systemd-wide yank, cut and paste
