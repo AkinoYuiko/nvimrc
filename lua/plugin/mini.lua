@@ -25,7 +25,7 @@ vim.pack.add({ 'https://github.com/nvim-mini/mini.nvim' }, {
 						require('mini.' .. mod).setup(opts)
 					end
 					-- copied from LazyVim, to handle skip_opts
-					require('util.mini').pairs({
+					momo.mini.pairs({
 						modes = { insert = true, command = true, terminal = false },
 						skip_next = [=[[%w%%%'%[%"%.%`%$]]=],
 						skip_ts = { 'string' },

@@ -1,5 +1,5 @@
 local M = {}
 
-M.treesitter = require('util.treesitter')
+M.mini = require('util.mini')
 
 return M
