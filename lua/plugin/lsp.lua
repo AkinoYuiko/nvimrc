@@ -14,24 +14,24 @@ local function lsp_setup_fn()
 	-- set lsp key bindings
 	require('keymap.lsp')
 	-- autocmd for format on save
-	local lsp_group = vim.api.nvim_create_augroup('nvim.lsp.format', {})
-	vim.api.nvim_create_autocmd('LspAttach', {
-		group = lsp_group,
-		callback = function(args)
-			local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-			if not client then return end
-			if
-				not client:supports_method('textDocument/willSaveWaitUntil')
-				and client:supports_method('textDocument/formatting')
-			then
-				vim.api.nvim_create_autocmd('BufWritePre', {
-					group = lsp_group,
-					buffer = args.buf,
-					callback = function() vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 }) end,
-				})
-			end
-		end,
-	})
+	-- local lsp_group = vim.api.nvim_create_augroup('nvim.lsp.format', {})
+	-- vim.api.nvim_create_autocmd('LspAttach', {
+	-- 	group = lsp_group,
+	-- 	callback = function(args)
+	-- 		local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+	-- 		if not client then return end
+	-- 		if
+	-- 			not client:supports_method('textDocument/willSaveWaitUntil')
+	-- 			and client:supports_method('textDocument/formatting')
+	-- 		then
+	-- 			vim.api.nvim_create_autocmd('BufWritePre', {
+	-- 				group = lsp_group,
+	-- 				buffer = args.buf,
+	-- 				callback = function() vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 1000 }) end,
+	-- 			})
+	-- 		end
+	-- 	end,
+	-- })
 end
 -- Packages --
 vim.pack.add({
