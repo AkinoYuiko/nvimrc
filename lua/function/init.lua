@@ -1,13 +1,13 @@
-local au = vim.api.nvim_create_autocmd
-local uc = vim.api.nvim_create_user_command
+local autocmd = vim.api.nvim_create_autocmd
+local usercmd = vim.api.nvim_create_user_command
 local group = vim.api.nvim_create_augroup('momoGroup', { clear = true })
 -- Highlight Yanked Texts
-au('TextYankPost', {
+autocmd('TextYankPost', {
 	group = group,
 	callback = function() vim.hl.on_yank({ timeout = 300 }) end,
 })
 -- Last place
-au('BufReadPost', {
+autocmd('BufReadPost', {
 	group = group,
 	callback = function()
 		local fname = vim.fn.expand('%:t')
@@ -19,7 +19,7 @@ au('BufReadPost', {
 	end,
 })
 -- Treesitter
-au('FileType', {
+autocmd('FileType', {
 	group = group,
 	callback = function(ev)
 		local lang = vim.treesitter.language.get_lang(ev.match)
@@ -37,13 +37,13 @@ au('FileType', {
 	end,
 })
 -- Internal fn
-au('VimEnter', {
+autocmd('VimEnter', {
 	group = group,
 	once = true,
 	callback = function()
 		vim.defer_fn(function()
 			-- chdir
-			uc('Chdir', function(args) require('function.chdir').chdir(args.args == 'silent') end, {
+			usercmd('Chdir', function(args) require('function.chdir').chdir(args.args == 'silent') end, {
 				nargs = '?',
 				complete = function() return { 'silent' } end,
 			})

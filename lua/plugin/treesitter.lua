@@ -1,16 +1,16 @@
-local au = vim.api.nvim_create_autocmd
+local autocmd = vim.api.nvim_create_autocmd
 local group = vim.api.nvim_create_augroup('nvim-treesitter', { clear = true })
 vim.pack.add({ 'https://github.com/nvim-treesitter/nvim-treesitter' }, {
 	confirm = false,
 	load = function(pack)
 		-- nvim-treesitter
-		au('VimEnter', {
+		autocmd('VimEnter', {
 			group = group,
 			once = true,
 			callback = function()
 				vim.schedule(function()
 					vim.cmd.packadd(pack.spec.name)
-					au('PackChanged', {
+					autocmd('PackChanged', {
 						group = group,
 						pattern = { 'nvim-treesitter' },
 						callback = function()
