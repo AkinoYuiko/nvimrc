@@ -153,6 +153,8 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('UIEnter', {
 	once = true,
 	callback = function()
+		if pcall(vim.cmd.packadd, 'mason.nvim') then require('mason').setup() end
+		if pcall(vim.cmd.packadd, 'mason-lspconfig.nvim') then require('mason-lspconfig').setup() end
 		if pcall(vim.cmd.packadd, 'fidget.nvim') then require('fidget').setup() end
 		if pcall(vim.cmd.packadd, 'flash.nvim') then
 			require('flash').setup()
