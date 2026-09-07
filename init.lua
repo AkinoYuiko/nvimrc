@@ -147,8 +147,8 @@ vim.api.nvim_create_autocmd('FileType', {
 	end,
 })
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = 'help',
-	callback = function() vim.o.wrap = true end,
+	pattern = { 'help', 'markdown' },
+	callback = function() vim.opt_local.wrap = true end,
 })
 vim.api.nvim_create_autocmd('UIEnter', {
 	once = true,
